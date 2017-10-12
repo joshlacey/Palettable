@@ -2,7 +2,7 @@ import React from 'react';
 import Snap from 'snapsvg-cjs';
 import { connect } from 'react-redux'
 import SVGElement from './SVGElement'
-import { savePalete } from '../../actions/palete'
+import { savePalate } from '../../actions/palate'
 
 class SVGContainer extends React.Component {
 
@@ -20,12 +20,12 @@ componentDidMount = () => {
 }
 
 saveSVG = () => {
-  const palete = document.getElementById('mainContainer').cloneNode(true)
-  palete.id += "1"
+  const palate = document.getElementById('mainContainer').cloneNode(true)
+  palate.id += "1"
   const xmlSerializer = new XMLSerializer;
-  const svgString = xmlSerializer.serializeToString(palete);
-  this.props.savePalete(1, svgString)
-  document.body.appendChild(palete)
+  const svgString = xmlSerializer.serializeToString(palate);
+  this.props.savePalate(1, svgString)
+  document.body.appendChild(palate)
 
   //for parsing the string to javascript object.
         //const dom = new DOMParser;
@@ -53,13 +53,13 @@ editMode = () => {
     const overlayStyle={zIndex: '2', width: '100%', height: '100%'}
     const elements = this.props.colors ? this.props.colors.map((c,i) => <SVGElement key={i} id={"svg" + i} editMode={this.state.editMode} editOptions={this.editOptions} edit={this.state.editMode} fill={c.color}/>) : null
     return (
-      <div id='#paleteContainer'>
+      <div id='#palateContainer'>
         {this.state.editMode ? <div id={'editOptions'} style={overlayStyle}>{this.editOptions}</div> : null}
         <svg width={'400px'} height={'400px'} id={'mainContainer'} >
           {this.state.mounted ? elements : null}
         </svg>
         {this.state.editMode ? <div style={overlayStyle}></div> : null}
-        <button onClick={this.editMode}>Edit Palete</button>
+        <button onClick={this.editMode}>Edit Palate</button>
         <button onClick={this.saveSVG}>Save</button>
       </div>
     )
@@ -74,8 +74,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    savePalete: (userId, svg) => {
-      dispatch(savePalete(userId, svg))
+    savePalate: (userId, svg) => {
+      dispatch(savePalate(userId, svg))
     }
   }
 }

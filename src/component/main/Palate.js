@@ -6,7 +6,7 @@ String.prototype.replaceAll = function(search, replacement) {
     return target.replace(new RegExp(search, 'g'), replacement);
 };
 
-class Palete extends React.Component {
+class Palate extends React.Component {
 
 
   render(){
@@ -22,4 +22,4 @@ class Palete extends React.Component {
   }
 }
 
-export default Palete
+export default Palate

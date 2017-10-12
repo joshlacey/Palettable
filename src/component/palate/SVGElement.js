@@ -45,9 +45,9 @@ import Snap from 'snapsvg-cjs';
 class SVGElement extends React.Component {
 
 
-  componentWillReceiveProps = (nextProps) => {
-    console.log(nextProps)
-    const s = Snap(`#${nextProps.id}`)
+  componentDidMount = () => {
+    console.log(this)
+    const s = Snap(`#${this.props.id}`)
 
 
     var dragging = 0;
@@ -89,10 +89,10 @@ class SVGElement extends React.Component {
 
 
 
-    let myCircle2 = s.circle(50,50,50).attr({ fill: nextProps.fill }).limitDrag({ x: 0, y: 0, minx: 0, miny: 0, maxx: 400, maxy: 400 });
-    console.log("fromtheinside", nextProps.editMode)
-    var mode = nextProps.editMode ? addHandleFunc : () => console.log('not in edit mode')
-    myCircle2.dblclick( mode )
+    let myCircle2 = s.circle(50,50,50).attr({ fill: this.props.fill }).limitDrag({ x: 0, y: 0, minx: 0, miny: 0, maxx: 400, maxy: 400 });
+    console.log("fromtheinside", this.props.editMode)
+    var mode = this.props.editMode ? addHandleFunc : () => console.log('not in edit mode')
+    myCircle2.dblclick( addHandleFunc )
   }
 
 

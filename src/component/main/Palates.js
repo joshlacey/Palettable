@@ -1,12 +1,12 @@
 import React from 'react';
-import Palete from './Palete'
+import Palate from './Palate'
 
 
-class Paletes extends React.Component {
+class Palates extends React.Component {
 
 state={
   loading:false,
-  paletes: []
+  palates: []
 }
 
 loading = () => {
@@ -21,24 +21,25 @@ loading = () => {
 
 componentDidMount = () => {
   this.setState({loading: true})
-  fetch(process.env.REACT_APP_API_ENDPOINT + 'paletes')
+  fetch(process.env.REACT_APP_API_ENDPOINT + 'palates')
     .then(resp => resp.json())
     .then(resp => this.setState({
       loading: false,
-      paletes: resp
+      palates: resp
     }))
 }
 
 
 
   render() {
-    const paletes = this.state.paletes.length ? this.state.paletes.map(p => <Palete svg={p}/>) : null
+    const styling = {display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)'}
+    const palates = this.state.palates.length ? this.state.palates.map(p => <Palate svg={p}/>) : null
     return (
-      <div>
-      { this.state.loading ? this.loading() : paletes }
+      <div style={styling}>
+      { this.state.loading ? this.loading() : palates }
       </div>
     )
   }
 }
 
-export default Paletes
+export default Palates

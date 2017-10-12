@@ -1,21 +1,21 @@
-function savedPalete(svg) {
+function savedPalate(svg) {
   return {
-    type: "PALETE_SAVED",
+    type: "PALATE_SAVED",
     payload: svg
   }
 }
 
-function savingPalete() {
+function savingPalate() {
   return {
-    type: "SAVING_PALETE"
+    type: "SAVING_PALATE"
   }
 }
 
-export function savePalete(userId, palete) {
+export function savePalate(userId, palate) {
   return function (dispatch) {
-    dispatch(savingPalete())
+    dispatch(savingPalate())
     const body = {user_id: userId,
-            data: {svg: palete }
+            data: {svg: palate }
           }
     const params = {
       method: 'POST',
@@ -24,12 +24,12 @@ export function savePalete(userId, palete) {
 
     }
 
-    fetch(process.env.REACT_APP_API_ENDPOINT + 'users/' + userId + '/paletes', params)
+    fetch(process.env.REACT_APP_API_ENDPOINT + 'users/' + userId + '/palates', params)
       .then((res) => res.json())
       .then((json) => {
         console.log(json)
         if (json){
-          dispatch(savedPalete(json))
+          dispatch(savedPalate(json))
         } else {
           alert("didn't work")
         }
