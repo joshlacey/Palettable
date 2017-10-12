@@ -5,14 +5,15 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import imageReducer from './reducers/imageReducer';
+import uploaderReducer from './reducers/uploaderReducer';
+import paleteReducer from './reducers/paleteReducer';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 //const rootReducer = imageReducer
-//const rootReducer = combineReducers({image: imageReducer})
-const store = createStore(imageReducer, composeWithDevTools(applyMiddleware(thunk)))
+const rootReducer = combineReducers({uploader: uploaderReducer, palete: paleteReducer})
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 
 ReactDOM.render(<Provider store={store}><Router><App /></Router></Provider>, document.getElementById('root'));
 registerServiceWorker();

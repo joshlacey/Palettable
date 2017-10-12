@@ -19,18 +19,6 @@ function fetchedColors(colors) {
   }
 }
 
-export function fetchColors() {
-  return function(dispatch) {
-    dispatch(fetchingColors())
-    fetch('https://www.googleapis.com/books/v1/volumes?q=subject:suspense&maxResults=40')
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json)
-        dispatch(fetchedColors(json))
-      })
-  }
-}
-
 export function searchColors(url) {
   return function (dispatch) {
     dispatch(fetchingColors())
@@ -61,7 +49,7 @@ export function searchColors(url) {
       body: JSON.stringify(body)
 
     }
-    
+
     fetch('https://vision.googleapis.com/v1/images:annotate?key='+ process.env.REACT_APP_CLOUDVISION_KEY, params)
       .then((res) => res.json())
       .then((json) => {
@@ -71,5 +59,12 @@ export function searchColors(url) {
           alert(json.responses[0].error.message)
         }
       })
+  }
+}
+
+export function addColors(array) {
+  return{
+    type: "ADD_COLORS",
+    payload: array
   }
 }
