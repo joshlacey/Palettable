@@ -22,7 +22,7 @@ loading = () => {
 componentDidMount = () => {
   this.setState({loading: true})
   fetch(process.env.REACT_APP_API_ENDPOINT + 'palates')
-    .then(resp => resp.json())
+    .then(resp => {console.log('loading'); return resp.json()})
     .then(resp => this.setState({
       loading: false,
       palates: resp

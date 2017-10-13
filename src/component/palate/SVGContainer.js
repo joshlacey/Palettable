@@ -49,7 +49,6 @@ editMode = () => {
 // }
 
   render () {
-    console.log(this.state.editMode)
     const overlayStyle={zIndex: '2', width: '100%', height: '100%'}
     const elements = this.props.colors ? this.props.colors.map((c,i) => <SVGElement key={i} id={"svg" + i} editMode={this.state.editMode} editOptions={this.editOptions} edit={this.state.editMode} fill={c.color}/>) : null
     return (

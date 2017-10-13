@@ -46,7 +46,6 @@ class SVGElement extends React.Component {
 
 
   componentDidMount = () => {
-    console.log(this)
     const s = Snap(`#${this.props.id}`)
 
 
@@ -90,7 +89,6 @@ class SVGElement extends React.Component {
 
 
     let myCircle2 = s.circle(50,50,50).attr({ fill: this.props.fill }).limitDrag({ x: 0, y: 0, minx: 0, miny: 0, maxx: 400, maxy: 400 });
-    console.log("fromtheinside", this.props.editMode)
     var mode = this.props.editMode ? addHandleFunc : () => console.log('not in edit mode')
     myCircle2.dblclick( addHandleFunc )
   }
@@ -99,7 +97,6 @@ class SVGElement extends React.Component {
 
 
   render() {
-    console.log('from the element', this.props.editMode)
     return (
       <svg id={this.props.id} />
     )
