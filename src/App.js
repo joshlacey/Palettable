@@ -7,15 +7,16 @@ import SVGContainer from './component/palate/SVGContainer';
 import Palates from './component/main/Palates';
 import SVGEdit from './component/palate/SVGEdit';
 import Nav from './component/Nav';
-import { loginUser, logoutUser } from './actions/userServices';
+import { loginUser, logoutUser, createUser } from './actions/userServices';
 import Authorize from './component/Authorize';
 import LoginForm from './component/LoginForm'
+import SignupForm from './component/SignupForm'
 
 class App extends Component {
 
   state = {
     user: {},
-    isLoggedIn: false
+    isLoggedIn: localStorage.getItem('jwtToken') ? true : false
   }
 
 
@@ -26,8 +27,7 @@ class App extends Component {
         console.log(user)
         user.jwt !== undefined ? localStorage.setItem("jwtToken", user.jwt) : null
         this.setState({
-          user,
-          isLoggedIn: true
+          user
         })
       })
 
@@ -36,16 +36,26 @@ class App extends Component {
   logout = () => {
     logoutUser()
     this.setState({
-      user: null,
-      isLoggedIn: false
+      user: null
+    })
+  }
+
+  signUp = (singupParams) => {
+    createUser(singupParams)
+    .then((user) => {
+      user.jwt !== undefined ? localStorage.setItem("jwtToken", user.jwt) : null
+      this.setState({
+        user
+      })
     })
   }
 
 
 
   render() {
-    console.log("logged in?", this.state.isLoggedIn)
+    console.log("logged in ?", this.state.isLoggedIn)
     const AuthLoginForm = Authorize(LoginForm)
+    const AuthSignupForm = Authorize(SignupForm)
 
     return (
       <div>
@@ -56,6 +66,7 @@ class App extends Component {
             return <Redirect to='/palates' />
         }} />
         <Route path="/login" render={(props) => <AuthLoginForm onLogin={this.login} {...props} />}/>
+        <Route path="/signup" render={(props) => <AuthSignupForm onSignup={this.signUp} {...props} />}/>
         <Route exact path='/palates' component={Palates} />
         <Route exact path='/edit' component={SVGEdit} />
       </div>

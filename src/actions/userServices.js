@@ -16,3 +16,15 @@ export function loginUser(loginParams) {
 export function logoutUser() {
   localStorage.removeItem("jwtToken")
 }
+
+export function createUser(singupParams) {
+  return fetch(`${process.env.REACT_APP_API_ENDPOINT}signup`, {
+    method: 'post',
+    body: singupParams,
+    headers: {
+      "Accept":"application/json",
+      "Content-Type":"application/json"
+    }
+  })
+    .then((res) => res.json())
+}

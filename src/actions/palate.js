@@ -1,3 +1,11 @@
+function headers () {
+  return {
+    'content-type': 'application/json',
+    'accept': 'application/json',
+    'Authorization': localStorage.getItem('jwtToken')
+  }
+}
+
 function savedPalate(svg) {
   return {
     type: "PALATE_SAVED",
@@ -15,11 +23,12 @@ export function savePalate(userId, palate) {
   return function (dispatch) {
     dispatch(savingPalate())
     const body = {user_id: userId,
-            data: {svg: palate }
+            palate_data: {color: '234 123 123', svg: palate }
           }
+    console.log('header that is being sent', headers())
     const params = {
       method: 'POST',
-      headers: {'Content-Type':'application/json'},
+      headers: headers(),
       body: JSON.stringify(body)
 
     }

@@ -10,6 +10,7 @@ class Nav extends React.Component {
         <NavLink to='/palates'>Palates</NavLink>
         <NavLink to='/logout'>Logout</NavLink>
         <NavLink to='/edit'>Edit??</NavLink>
+        <NavLink to='/signup'>Signup</NavLink>
       </div>
     )
   }
