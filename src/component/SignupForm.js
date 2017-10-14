@@ -11,6 +11,7 @@ class SignupForm extends React.Component{
   handleSubmit = (event) => {
       event.preventDefault()
       const signupParams = { username: this.state.username, password: this.state.password}
+      console.log('signupForm', signupParams)
       this.props.onSignup(signupParams)
       this.setState({
         username: "",

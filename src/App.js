@@ -11,12 +11,13 @@ import { loginUser, logoutUser, createUser } from './actions/userServices';
 import Authorize from './component/Authorize';
 import LoginForm from './component/LoginForm'
 import SignupForm from './component/SignupForm'
+import RePalate from './component/main/RePalate'
 
 class App extends Component {
 
   state = {
     user: {},
-    isLoggedIn: localStorage.getItem('jwtToken') ? true : false
+    isLoggedIn: !!localStorage.getItem('jwtToken')
   }
 
 
@@ -43,10 +44,12 @@ class App extends Component {
   signUp = (singupParams) => {
     createUser(singupParams)
     .then((user) => {
-      user.jwt !== undefined ? localStorage.setItem("jwtToken", user.jwt) : null
-      this.setState({
-        user
-      })
+      if (user.jwt !== undefined){
+        localStorage.setItem("jwtToken", user.jwt)
+        this.setState({ user })
+      } else {
+        alert(user.message)
+      }
     })
   }
 
@@ -55,7 +58,6 @@ class App extends Component {
   render() {
     console.log("logged in ?", this.state.isLoggedIn)
     const AuthLoginForm = Authorize(LoginForm)
-    const AuthSignupForm = Authorize(SignupForm)
 
     return (
       <div>
@@ -65,9 +67,10 @@ class App extends Component {
             this.logout()
             return <Redirect to='/palates' />
         }} />
-        <Route path="/login" render={(props) => <AuthLoginForm onLogin={this.login} {...props} />}/>
-        <Route path="/signup" render={(props) => <AuthSignupForm onSignup={this.signUp} {...props} />}/>
+        <Route exact path="/login" render={(props) => <AuthLoginForm onLogin={this.login} {...props} />}/>
+        <Route exact path="/signup" render={(props) => <SignupForm onSignup={this.signUp} {...props} />}/>
         <Route exact path='/palates' component={Palates} />
+        <Route exact path='/palates/:id' component={RePalate} />
         <Route exact path='/edit' component={SVGEdit} />
       </div>
     );

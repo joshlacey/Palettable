@@ -1,7 +1,7 @@
 export function loginUser(loginParams) {
   const body = JSON.stringify(loginParams)
   return fetch(`${process.env.REACT_APP_API_ENDPOINT}login`, {
-    method: 'post',
+    method: 'POST',
     body: body,
     headers: {
       "Accept":"application/json",
@@ -17,10 +17,11 @@ export function logoutUser() {
   localStorage.removeItem("jwtToken")
 }
 
-export function createUser(singupParams) {
+export function createUser(signupParams) {
+  console.log(signupParams)
   return fetch(`${process.env.REACT_APP_API_ENDPOINT}signup`, {
-    method: 'post',
-    body: singupParams,
+    method: 'POST',
+    body: JSON.stringify(signupParams),
     headers: {
       "Accept":"application/json",
       "Content-Type":"application/json"

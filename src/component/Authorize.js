@@ -6,12 +6,13 @@ function Authorize(RenderedComponent, props) {
   return class extends React.Component {
 
     render() {
-
-      if ((localStorage.getItem('jwtToken') && this.props.location.pathname === "/login") || (localStorage.getItem('jwtToken') && this.props.location.pathname === "/signup")) {
+      const hasToken = !!localStorage.getItem('jwtToken')
+      const location = this.props.location.pathname
+      if ((hasToken && location === "/login") || (hasToken && location === "/signup")) {
         return <Redirect to="/palates" />
 
         // I am logged in
-      } else if (!localStorage.getItem('jwtToken') && this.props.location.pathname !== "/login") {
+      } else if (!hasToken && location !== "/login") {
 
         return <Redirect to="/login" />
         // not logged in
