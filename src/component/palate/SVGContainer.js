@@ -24,13 +24,9 @@ saveSVG = () => {
   palate.id += "1"
   const xmlSerializer = new XMLSerializer;
   const svgString = xmlSerializer.serializeToString(palate);
-  this.props.savePalate(1, svgString)
-  document.body.appendChild(palate)
-
-  //for parsing the string to javascript object.
-        //const dom = new DOMParser;
-        //dom.parseFromString(svgString, ‘text/xml’);
-
+  const id = localStorage.getItem('userId') ? localStorage.getItem('userId') : null
+  id ? this.props.savePalate(id, svgString) : alert("you must be logged in to save.")
+  //document.body.appendChild(palate)
 }
 
 editMode = () => {
@@ -50,7 +46,7 @@ editMode = () => {
 
   render () {
     const overlayStyle={zIndex: '2', width: '100%', height: '100%'}
-    const elements = this.props.colors ? this.props.colors.map((c,i) => <SVGElement key={i} id={"svg" + i} editMode={this.state.editMode} editOptions={this.editOptions} edit={this.state.editMode} fill={c.color}/>) : null
+    const elements = this.props.colors ? this.props.colors.map((c,i) => <SVGElement key={i} id={"svg" + i} fill={c}/>) : null
     return (
       <div id='#palateContainer'>
         {this.state.editMode ? <div id={'editOptions'} style={overlayStyle}>{this.editOptions}</div> : null}

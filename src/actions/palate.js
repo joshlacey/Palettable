@@ -25,7 +25,6 @@ export function savePalate(userId, palate) {
     const body = {user_id: userId,
             palate_data: {color: '234 123 123', svg: palate }
           }
-    console.log('header that is being sent', headers())
     const params = {
       method: 'POST',
       headers: headers(),
@@ -36,7 +35,6 @@ export function savePalate(userId, palate) {
     fetch(process.env.REACT_APP_API_ENDPOINT + 'users/' + userId + '/palates', params)
       .then((res) => res.json())
       .then((json) => {
-        console.log(json)
         if (json){
           dispatch(savedPalate(json))
         } else {

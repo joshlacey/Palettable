@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux';
+import { loginUser } from '../actions/userServices';
 
 
 class LoginForm extends React.Component{
@@ -11,7 +13,7 @@ class LoginForm extends React.Component{
   handleSubmit = (event) => {
       event.preventDefault()
       const loginParams = { username: this.state.username, password: this.state.password}
-      this.props.onLogin(loginParams)
+      this.props.login(loginParams)
       this.setState({
         username: "",
         password: ""
@@ -47,4 +49,12 @@ class LoginForm extends React.Component{
   }
 }
 
-export default LoginForm
+function mapDispatchToProps(dispatch) {
+  return {
+    login: (loginParams) => {
+      dispatch(loginUser(loginParams))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(LoginForm)

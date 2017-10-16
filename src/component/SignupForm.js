@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux';
+import { createUser } from '../actions/userServices';
 
 
 class SignupForm extends React.Component{
@@ -12,7 +14,7 @@ class SignupForm extends React.Component{
       event.preventDefault()
       const signupParams = { username: this.state.username, password: this.state.password}
       console.log('signupForm', signupParams)
-      this.props.onSignup(signupParams)
+      this.props.signUp(signupParams)
       this.setState({
         username: "",
         password: ""
@@ -48,4 +50,13 @@ class SignupForm extends React.Component{
   }
 }
 
-export default SignupForm
+function mapDispatchToProps(dispatch) {
+  return {
+    signUp: (signupParams) => {
+      dispatch(createUser(signupParams))
+    }
+  }
+}
+
+
+export default connect(null, mapDispatchToProps)(SignupForm)

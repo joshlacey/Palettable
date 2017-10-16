@@ -32,7 +32,10 @@ deleteColor = (id) => {
 }
 
 submitColors = () => {
-  this.props.addColors(this.state.colorList)
+  const temp = this.state.colorList.map(c => c.color)
+  const unique = [...new Set(temp)]
+  console.log(unique)
+  this.props.addColors(unique)
 }
 
 render () {

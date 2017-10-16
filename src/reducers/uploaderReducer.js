@@ -8,7 +8,9 @@ export default function uploaderReducer(state={ imageUrl: "", colors: {}, colorC
     case "FETCHED_COLORS":
       return { ...state, colors: action.payload, fetchingColors: false }
     case "ADD_COLORS":
-      return { ...state, colorContainer: [...state.colorContainer, ...action.payload]}
+      const temp = [ ...state.colorContainer, ...action.payload ]
+      const unique = [ ...new Set(temp)]
+      return { ...state, colorContainer: unique }
     default:
       return state
   }

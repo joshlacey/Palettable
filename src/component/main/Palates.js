@@ -23,19 +23,17 @@ loading = () => {
 componentDidMount = () => {
   this.setState({loading: true})
   fetch(process.env.REACT_APP_API_ENDPOINT + 'palates')
-    .then(resp => {console.log('loading'); return resp.json()})
+    .then(resp => resp.json())
     .then(resp => this.setState({
       loading: false,
       palates: resp
     }))
 }
 
-
-
   render() {
     const styling = {display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)'}
     const ps = this.state.palates
-    const palates = ps.length ? ps.map(p => <Link to={`/palates/${p.id}`}><Palate svg={p}/></Link>) : null
+    const palates = ps.length ? ps.map((p,i) => <Link key={i} to={`/palates/${p.id}`}><Palate key={i} svg={p}/></Link>) : null
     return (
       <div style={styling}>
       { this.state.loading ? this.loading() : palates }
