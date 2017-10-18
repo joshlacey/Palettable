@@ -19,11 +19,12 @@ function savingPalate() {
   }
 }
 
-export function savePalate(userId, palate) {
+export function savePalate(userId, palate, copy) {
   return function (dispatch) {
     dispatch(savingPalate())
+    console.log(copy)
     const body = {user_id: userId,
-            palate_data: {color: '234 123 123', svg: palate }
+            palate_data: {color: '234 123 123', svg: palate, copy: copy }
           }
     const params = {
       method: 'POST',
@@ -41,5 +42,25 @@ export function savePalate(userId, palate) {
           alert("didn't work")
         }
       })
+  }
+}
+
+export function updatePalate(currentPalate) {
+  return {
+    type: "UPDATE_PALATE",
+    payload: currentPalate
+  }
+}
+
+export function addToPalate(svg) {
+  return {
+    type: "ADD_TO_PALATE",
+    payload: svg
+  }
+}
+
+export function removeCurrentColor() {
+  return{
+    type: "REMOVE_CURRENT_COLOR"
   }
 }

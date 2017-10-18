@@ -68,3 +68,16 @@ export function addColors(array) {
     payload: array
   }
 }
+
+export function addOneColor(string) {
+  return{
+    type: "ADD_COLOR",
+    payload: string
+  }
+}
+
+export function removeColors() {
+  return {
+    type: "REMOVE_COLORS"
+  }
+}

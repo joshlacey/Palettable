@@ -1,18 +1,20 @@
-import React from 'react'
-import { addColors } from '../../actions/uploader'
-import { connect } from 'react-redux'
-import ColorItem from './ColorItem'
+import React from 'react';
+import { addColors, removeColors, addOneColor } from '../../actions/uploader';
+import { connect } from 'react-redux';
+import ColorItem from './ColorItem';
+import { SliderPicker } from 'react-color';
 
 class ColorsContainer extends React.Component {
 
 state = {
-  colorList: []
+  colorList: [],
+  pickerColor: ''
 }
 
 loading = () => {
   return(
     <svg width="48" height="48" viewBox="0 0 300 300">
-      <path d="M 150,0 a 150,150 0 0,1 106.066,256.066 l -35.355,-35.355 a -100,-100 0 0,0 -70.711,-170.711 z" fill="#76f19a">
+      <path d="M 150,0 a 150,150 0 0,1 106.066,256.066 l -35.355,-35.355 a -100,-100 0 0,0 -70.711,-170.711 z" fill="#ccc">
         <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 150 150" to="360 150 150" begin="0s" dur=".5s" fill="freeze" repeatCount="indefinite"></animateTransform>
       </path>
     </svg>
@@ -33,9 +35,20 @@ deleteColor = (id) => {
 
 submitColors = () => {
   const temp = this.state.colorList.map(c => c.color)
+  temp.push(this.state.pickerColor)
   const unique = [...new Set(temp)]
-  console.log(unique)
   this.props.addColors(unique)
+  this.props.addOneColor(unique[0])
+}
+
+handleSlider = (color) => {
+  const c = color.rgb
+  const string = `rgb(${c.r},${c.g},${c.b})`
+  this.setState({pickerColor: string})
+}
+
+componentWillUnmount() {
+  this.props.removeColors()
 }
 
 render () {
@@ -44,6 +57,7 @@ render () {
   return(
       <div>
         {this.props.loading ? this.loading() : colors}
+        <SliderPicker color={this.state.pickerColor} onChangeComplete={this.handleSlider}/>
         <button onClick={this.submitColors}>Submit Colors</button>
       </div>
   )
@@ -62,6 +76,12 @@ function mapDispatchToProps(dispatch) {
   return {
     addColors: (colorArray) => {
       dispatch(addColors(colorArray))
+    },
+    removeColors: () => {
+      dispatch(removeColors())
+    },
+    addOneColor: (color) => {
+      dispatch(addOneColor(color))
     }
   }
 }
