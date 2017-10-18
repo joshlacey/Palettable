@@ -11,11 +11,9 @@ class SVGContainer extends React.Component {
   }
 
 componentDidMount = () => {
-  var s = Snap('#mainContainer')
-  s.attr({ viewBox: "0 0 400 400" })
-  this.setState({
-    mounted: true
-  })
+
+  var test = Snap('#mainContainer')
+  test.attr({ viewBox: "0 0 400 400" })
 }
 
 
@@ -28,23 +26,14 @@ toArray (obj) {
 }
 
 saveSVG = () => {
-  const palate = document.getElementById('mainContainer').cloneNode(true)
   const palateCopy = document.getElementById('mainContainer').cloneNode(true)
   const children = this.toArray(palateCopy.childNodes)
   children.shift()
   children.shift()
-  console.log(children)
-  palate.id += "1"
-
-  const xmlSerializer = new XMLSerializer;
-
-  const svgString = xmlSerializer.serializeToString(palate);
-
 
   const id = localStorage.getItem('userId') ? localStorage.getItem('userId') : null
-  id ? this.props.savePalate(id, svgString, children) : alert("you must be logged in to save.")
+  id ? this.props.savePalate(id, children) : alert("you must be logged in to save.")
 
-  //document.body.appendChild(palate)
 }
 
 editMode = () => {
@@ -55,14 +44,13 @@ editMode = () => {
 
   render () {
     //if there is a color added to the store element = <SVGElement withcolor/> dispatch()
-    console.log("thecurrentcolor", this.props.currentColor)
-    if (this.props.currentColor) {this.props.addToPalate(<SVGElement fill={this.props.currentColor}/>); this.props.removeCurrentColor() }
-    console.log(this.props.palateEls)
+    if (this.props.currentColor) {this.props.addToPalate(<SVGElement id={"other" + (this.props.palateEls.length + 1) } fill={this.props.currentColor}/>); this.props.removeCurrentColor() }
     const elements = this.props.colors ? this.props.colors.map((c,i) => <SVGElement key={i} id={"svg" + i} fill={c}/>) : null
     return (
       <div id='#palateContainer'>
+
         <svg width={'400px'} height={'400px'} id={'mainContainer'} >
-          {elements}
+          {this.props.palateEls}
         </svg>
         <button onClick={this.editMode}>Edit Palate</button>
         <button onClick={this.saveSVG}>Save</button>
@@ -71,14 +59,18 @@ editMode = () => {
   }
 }
 
-function toArray(obj) {
-  var array = [];
-  // iterate backwards ensuring that length is an UInt32
-  for (var i = obj.length >>> 0; i--;) {
-    array[i] = obj[i].outerHTML;
-  }
-  return array;
-}
+// <svg width={'400px'} height={'400px'} id={'mainContainer'} >
+//   {elements}
+// </svg>
+
+// function toArray(obj) {
+//   var array = [];
+//   // iterate backwards ensuring that length is an UInt32
+//   for (var i = obj.length >>> 0; i--;) {
+//     array[i] = obj[i].outerHTML;
+//   }
+//   return array;
+// }
 
 function mapStateToProps(state) {
   return {

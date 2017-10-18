@@ -19,12 +19,11 @@ function savingPalate() {
   }
 }
 
-export function savePalate(userId, palate, copy) {
+export function savePalate(userId, copy) {
   return function (dispatch) {
     dispatch(savingPalate())
-    console.log(copy)
     const body = {user_id: userId,
-            palate_data: {color: '234 123 123', svg: palate, copy: copy }
+            palate_data: {color: '234 123 123', copy: copy }
           }
     const params = {
       method: 'POST',

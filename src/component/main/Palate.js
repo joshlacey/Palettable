@@ -10,13 +10,20 @@ class Palate extends React.Component {
 
 
   render(){
-    const string = this.props.svg.data.svg
+    const string = this.props.svg
+    //debugger
     const temp = string.replaceAll('style=""', '')
     const svg = Parser(temp)
 
     return(
       <div>
-        {svg}
+        <svg width={'400px'} height={'400px'} id={'rePalate'} >
+          {svg}
+        </svg>
+        <svg>
+
+        </svg>
+
       </div>
     )
   }
