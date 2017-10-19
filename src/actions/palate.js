@@ -63,3 +63,22 @@ export function removeCurrentColor() {
     type: "REMOVE_CURRENT_COLOR"
   }
 }
+
+export function screenShot() {
+  return {
+    type: "SCREENSHOT"
+  }
+}
+
+export function resetPalate ( array ) {
+  return {
+    type: "RESET_PALATE",
+    payload: array
+  }
+}
+
+export function removeNextColors () {
+  return {
+    type: "REMOVE_NEXTCOLORS"
+  }
+}

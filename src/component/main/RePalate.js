@@ -38,19 +38,15 @@ class RePalate extends React.Component {
     }
     let copy = outer.state.palate
     swapElement(copy, index, 0)
-
-    console.log('copy', copy)
     this.setState({palate: copy})
-    console.log('palate', this.state.palate)
   }
 
   palateStop = (circle, outer) => {
-    const g = circle.outerSVG()
-    const index = outer.state.palate.findIndex(e => e.props.id == circle.parent().node.id)
-    outer.state.palate[index].props.children[2] = Parser(g)
-    console.log(outer.state.palate[index])
-    this.setState({palate: outer.state.palate})
-    console.log(this.state.palate)
+    console.log("hi")
+    // const g = circle.outerSVG()
+    // const index = outer.state.palate.findIndex(e => e.props.id == circle.parent().node.id)
+    // outer.state.palate[index].props.children[2] = Parser(g)
+    // this.setState({palate: outer.state.palate})
   }
 
   componentDidMount = () => {
@@ -66,14 +62,12 @@ class RePalate extends React.Component {
           palate: content,
           html: html
         })
-        //refactor with snap methods
         document.getElementById('rePalate').innerHTML = this.state.html
       })
       .then(()=> {
-        //console.log(this.state.palate)
         this.state.palate.forEach( i => {
           const element = Snap(`#${i.props.id}`)
-          const circle = element.children()[2]
+          const circle = element.children()[0]
           circle.drag( move, start, () => this.palateStop(circle, this) )
           circle.dblclick(() => this.doubleclick(circle, this))
         })
@@ -81,7 +75,6 @@ class RePalate extends React.Component {
   }
 
   render(){
-
     return(
       <div>
         <svg width={'400px'} height={'400px'} id={'rePalate'} >

@@ -1,6 +1,5 @@
 import React from 'react'
 import { uploadImage, searchColors } from '../../actions/uploader'
-import { Route, Link, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 class ImageUploader extends React.Component {

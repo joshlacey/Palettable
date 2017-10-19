@@ -35,10 +35,14 @@ deleteColor = (id) => {
 
 submitColors = () => {
   const temp = this.state.colorList.map(c => c.color)
-  temp.push(this.state.pickerColor)
+  this.state.pickerColor !== '' ? temp.push(this.state.pickerColor) : null
   const unique = [...new Set(temp)]
-  this.props.addColors(unique)
-  this.props.addOneColor(unique[0])
+  console.log("unique", unique)
+  if (unique.length === 1) {
+    this.props.addOneColor(unique[0])
+  } else {
+    this.props.addColors(unique)
+  }
 }
 
 handleSlider = (color) => {
@@ -67,7 +71,7 @@ render () {
 
 function mapStateToProps(state) {
   return {
-    colors: state.uploader.colors,
+    colors: state.uploader.fetchedColors,
     loading: state.uploader.fetchingColors
   }
 }
