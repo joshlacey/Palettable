@@ -7,15 +7,15 @@ export default function uploaderReducer(state={ imageUrl: "", fetchedColors: [],
       return { ...state, fetchingColors: true}
     case "FETCHED_COLORS":
       return { ...state, fetchedColors: action.payload, fetchingColors: false }
+    case "NOTHING_FETCHED":
+      return { ...state, fetchingColors: false }
     case "ADD_COLORS":
       console.log("reducer colorContainer", state.colorContainer)
       const next = action.payload.filter( item => item !== "" && !state.colorContainer.includes(item))
       return { ...state, nextColors: next, colorContainer: [ ...state.colorContainer, ...next] }
     case "ADD_COLOR":
       const c = !state.colorContainer.includes(action.payload) ? action.payload : null
-      console.log(c)
       const newColorsContainer = c ? [ ...state.colorContainer, c ] : state.colorContainer
-      console.log("reducer colorContainer", state.colorContainer)
       return {...state, color: c, colorContainer: newColorsContainer }
     case "REMOVE_COLORS":
       return { ...state, colorContainer: []}
@@ -23,6 +23,10 @@ export default function uploaderReducer(state={ imageUrl: "", fetchedColors: [],
       return { ...state, nextColors: [] }
     case "REMOVE_CURRENT_COLOR":
       return { ...state, color: ""}
+    case "REMOVE_ONE_COLOR":
+      const nextContainer = [...state.colorContainer].filter( color => color !== action.payload)
+      console.log("nextContainer", nextContainer, "action.payload", action.payload)
+      return { ...state, colorContainer: nextContainer}
     default:
       return state
   }

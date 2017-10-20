@@ -33,15 +33,28 @@ deleteColor = (id) => {
   })
 }
 
+componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+rgbToHex(r, g, b) {
+    return "#" + this.componentToHex(r) + this.componentToHex(g) + this.componentToHex(b);
+}
+
 submitColors = () => {
   const temp = this.state.colorList.map(c => c.color)
   this.state.pickerColor !== '' ? temp.push(this.state.pickerColor) : null
   const unique = [...new Set(temp)]
-  console.log("unique", unique)
+  const hexes = unique.map(c => {
+          const arr = c.replace("(", ",").replace(")", ",").split(",")
+          return this.rgbToHex(parseInt(arr[1], 10),parseInt(arr[2], 10),parseInt(arr[3], 10))
+      })
+  console.log("hexes", hexes)
   if (unique.length === 1) {
-    this.props.addOneColor(unique[0])
+    this.props.addOneColor(hexes[0])
   } else {
-    this.props.addColors(unique)
+    this.props.addColors(hexes)
   }
 }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import SVGContainer from './SVGContainer';
 import ImageUploader from '../uploader/ImageUploader';
 import ColorsContainer from '../uploader/ColorsContainer';
+import NoteForm from '../notes/NoteForm'
 
 class EditContainer extends React.Component {
 
@@ -14,6 +15,7 @@ class EditContainer extends React.Component {
           <ImageUploader />
           <p style={{fontSize: '70%'}}>google image: https://wallpaperscraft.com/image/google_search_logo_summer_drawing_26168_602x339.jpg</p>
           <ColorsContainer />
+          <NoteForm />
         </div>
       </div>
     )

@@ -1,7 +1,7 @@
 import React from 'react';
 import Parser from 'html-react-parser'
 import Snap from 'snapsvg-cjs';
-import addHandleFunc from '../../snap/scale.js'
+//import addHandleFunc from '../../snap/scale.js'
 import { start, move, stop } from '../../snap/dragCallbacks.js'
 
 String.prototype.replaceAll = function(search, replacement) {
@@ -41,14 +41,6 @@ class RePalate extends React.Component {
     this.setState({palate: copy})
   }
 
-  palateStop = (circle, outer) => {
-    console.log("hi")
-    // const g = circle.outerSVG()
-    // const index = outer.state.palate.findIndex(e => e.props.id == circle.parent().node.id)
-    // outer.state.palate[index].props.children[2] = Parser(g)
-    // this.setState({palate: outer.state.palate})
-  }
-
   componentDidMount = () => {
     this.setState({loading: true})
     const s = Snap(`#rePalate`)
@@ -68,7 +60,7 @@ class RePalate extends React.Component {
         this.state.palate.forEach( i => {
           const element = Snap(`#${i.props.id}`)
           const circle = element.children()[0]
-          circle.drag( move, start, () => this.palateStop(circle, this) )
+          circle.drag( move, start, stop )
           circle.dblclick(() => this.doubleclick(circle, this))
         })
       })

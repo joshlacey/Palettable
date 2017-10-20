@@ -10,7 +10,8 @@ class SVGContainer extends React.Component {
   state = {
     reorderMode: false,
     deleteMode: false,
-    save: false
+    save: false,
+    currentHoverData: ""
   }
 
 componentDidMount = () => {
@@ -24,13 +25,13 @@ componentWillUpdate(nextProps, nextState) {
     this.setState({save:false})
   }
   if (nextProps.currentColor) {
-      this.props.addToPalate({id: "other" + (this.props.palateEls.length + 1), size: "", fill: nextProps.currentColor, position: "" })
+      this.props.addToPalate({id: nextProps.currentColor.split('#')[1], size: "", fill: nextProps.currentColor, position: "" })
       this.props.removeCurrentColor()
     }
   if (nextProps.nextColors.length) {
     console.log("nextColors", nextProps.nextColors)
     nextProps.nextColors.forEach( (color, i) => {
-      this.props.addToPalate({id: "other" + (this.props.palateEls.length + i), size: "", fill: color, position: "" })
+      this.props.addToPalate({id: color.split('#')[1], fill: color, position: "" })
     })
     this.props.removeNextColors()
   }
@@ -61,6 +62,7 @@ takeScreenShot = () => {
   } else {
     something = content.map(element => {
     const before = element.props.children
+    console.log(element)
     const sub = before.length ? before[before.length-1] : before
     const subsub = sub.props.children.length ? sub.props.children[0].props : sub.props.children.props
     return ({id: element.props.id, mode: true, size: sub.props.transform , fill: subsub.fill, position: subsub.transform})
@@ -73,6 +75,14 @@ reorderMode = () => {
   this.setState({
     reorderMode: !this.state.reorderMode,
     deleteMode: false,
+    save: true
+  })
+}
+
+deleteMode = () => {
+  this.setState({
+    reorderMode: false,
+    deleteMode: !this.state.deleteMode,
     save: true
   })
 }
@@ -92,6 +102,32 @@ reorder = (circle, parentId) => {
   this.props.resetPalate(copy)
 }
 
+deleteEl = ( circle, parentId ) => {
+  let index = this.props.palateEls.findIndex(e => e.id == parentId)
+  let copy = [...this.props.palateEls]
+  let newArr = copy.filter(el => el.id != parentId )
+  let color = copy[index].fill
+  this.props.removeOneColor(color)
+  this.props.resetPalate(newArr)
+}
+
+hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+
+hoverData = (parentId) => {
+  const circle = this.props.palateEls.find(element => element.id == parentId)
+  const rgb = this.hexToRgb(circle.fill)
+  this.setState({
+    currentHoverData: `Hex Value: ${circle.fill}, RGB Value: ${rgb.r}, ${rgb.g}, ${rgb.b}`
+  })
+}
+
 saveSVG = () => {
   const palateCopy = document.getElementById('mainContainer').cloneNode(true)
   const children = this.toArray(palateCopy.childNodes)
@@ -99,23 +135,30 @@ saveSVG = () => {
   children.shift()
 
   const id = localStorage.getItem('userId') ? localStorage.getItem('userId') : null
-  id ? this.props.savePalate(id, children) : alert("you must be logged in to save.")
+  id ? this.props.savePalate(id, children, this.props.title, this.props.note) : alert("you must be logged in to save.")
 
 }
 
-  render () {
-    const elements = this.props.palateEls.map((e, i) => <SVGElement key={e.id} reorder={this.reorder} mode={this.state.reorderMode} id={e.id} fill={e.fill} size={e.size} position={e.position}/>)
 
+  render () {
+    const elements = this.props.palateEls.map((e, i) => {console.log("what is being sent as the id", e.id); return <SVGElement key={e.id} hoverData={this.hoverData} reorder={this.reorder} deleteEl={this.deleteEl} reorderMode={this.state.reorderMode} deleteMode={this.state.deleteMode} id={e.id} fill={e.fill} size={e.size} position={e.position}/>})
+    const colors = this.props.colorsContainer.map((e, i) => <div key={e} style={{display: 'grid', backgroundColor: e, gridColumn: "1/2", width: '10px', height: '10px'}}/>)
     return (
       <div id='#palateContainer'>
+        <div style={{display: 'grid', gridTemplateColumns: "1fr 9fr"}}>
+          <div>
+            {colors}
+          </div>
+          <svg style={{display: 'grid', gridColumn: '2/3'}} width={'400px'} height={'400px'} id={'mainContainer'} >
+            {elements}
+          </svg>
+        </div>
 
-        <svg width={'400px'} height={'400px'} id={'mainContainer'} >
-          {elements}
-        </svg>
 
-        <button onClick={this.reorderMode}>Reorder Palate</button>
+        <button onClick={this.reorderMode}>Reorder Mode</button>
+        <button onClick={this.deleteMode}>Delete Mode</button>
         <button onClick={this.saveSVG}>Save</button>
-
+        <p>{this.state.currentHoverData}</p>
       </div>
     )
   }
@@ -126,7 +169,10 @@ function mapStateToProps(state) {
     colorsContainer: state.uploader.colorContainer,
     currentColor: state.uploader.color,
     palateEls: state.palate.otherPalate,
-    nextColors: state.uploader.nextColors
+    nextColors: state.uploader.nextColors,
+    title: state.palate.title,
+    note: state.palate.note
+
     //reorder: state.palate.reorderMode
   }
 }

@@ -1,12 +1,13 @@
 export default function palateReducer(state={ palate: "", screenShot: false, saving: false, current: [], otherPalate: [] }, action) {
   switch (action.type) {
     case "PALATE_SAVED":
-        return {...state, palate: action.payload, saving: false }
+        return {...state, palate: action.payload, saving: false, title: "", note: "" }
     case "SAVING_PALATE":
         return {...state, saving: true}
     case "UPDATE_PALATE":
         return {...state, current: action.payload }
     case "ADD_TO_PALATE":
+        console.log("addtopallateotherpalate", action.payload)
         const somethingelse = [...state.otherPalate, action.payload]
         const something = {...state, otherPalate: somethingelse }
         return something
@@ -15,6 +16,10 @@ export default function palateReducer(state={ palate: "", screenShot: false, sav
         return {...state, otherPalate: action.payload }
     case "SCREENSHOT":
         return {...state, screenShot: !state.screenShot}
+    case "TITLE":
+        return {...state, title: action.payload }
+    case "NOTE":
+        return {...state, note: action.payload}
     default:
       return state
   }

@@ -19,6 +19,12 @@ function fetchedColors(colors) {
   }
 }
 
+function nothingFetched() {
+  return {
+    type: "NOTHING_FETCHED"
+  }
+}
+
 export function searchColors(url) {
   return function (dispatch) {
     dispatch(fetchingColors())
@@ -57,6 +63,7 @@ export function searchColors(url) {
           dispatch(fetchedColors(json.responses[0].imagePropertiesAnnotation.dominantColors.colors))
         } else {
           alert(json.responses[0].error.message)
+          dispatch(nothingFetched())
         }
       })
   }

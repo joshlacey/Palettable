@@ -18,7 +18,12 @@ class ImageUploader extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault()
     //this.props.uploadImage(this.state.url)
-    this.props.searchColors(this.state.url)
+    if(this.state.url !== "") {
+      this.props.searchColors(this.state.url)
+    } else {
+      alert("Please enter a valid url")
+    }
+
   }
 
   render() {

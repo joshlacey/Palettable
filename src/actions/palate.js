@@ -19,11 +19,11 @@ function savingPalate() {
   }
 }
 
-export function savePalate(userId, copy) {
+export function savePalate(userId, copy, title, note) {
   return function (dispatch) {
     dispatch(savingPalate())
     const body = {user_id: userId,
-            palate_data: {color: '234 123 123', copy: copy }
+            palate_data: { copy: copy, tite: title, note: note }
           }
     const params = {
       method: 'POST',
@@ -80,5 +80,27 @@ export function resetPalate ( array ) {
 export function removeNextColors () {
   return {
     type: "REMOVE_NEXTCOLORS"
+  }
+}
+
+export function removeOneColor (color) {
+  return {
+    type: "REMOVE_ONE_COLOR",
+    payload: color
+  }
+}
+
+export function handleTitleChange(event) {
+  return {
+    type: "TITLE",
+    payload: event.target.value
+  }
+}
+
+
+export function handleNoteChange (event) {
+  return {
+    type: "NOTE",
+    payload: event.target.value
   }
 }
