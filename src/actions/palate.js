@@ -23,7 +23,7 @@ export function savePalate(userId, copy, title, note) {
   return function (dispatch) {
     dispatch(savingPalate())
     const body = {user_id: userId,
-            palate_data: { copy: copy, tite: title, note: note }
+            palate_data: { copy: copy, title: title, note: note }
           }
     const params = {
       method: 'POST',
