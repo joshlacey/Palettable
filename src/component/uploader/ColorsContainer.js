@@ -50,7 +50,7 @@ submitColors = () => {
           const arr = c.replace("(", ",").replace(")", ",").split(",")
           return this.rgbToHex(parseInt(arr[1], 10),parseInt(arr[2], 10),parseInt(arr[3], 10))
       })
-  console.log("hexes", hexes)
+  //console.log("hexes", hexes)
   if (unique.length === 1) {
     this.props.addOneColor(hexes[0])
   } else {
@@ -65,6 +65,7 @@ handleSlider = (color) => {
 }
 
 componentWillUnmount() {
+  console.log("componentwillunmount")
   this.props.removeColors()
 }
 

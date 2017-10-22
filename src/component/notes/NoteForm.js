@@ -5,10 +5,10 @@ import { handleNoteChange, handleTitleChange } from '../../actions/palate';
 
 class NoteForm extends React.Component{
 
-  state = {
-    title: "",
-    note: ""
-  }
+  // state = {
+  //   title: "",
+  //   note: ""
+  // }
 
   // handleSubmit = (event) => {
   //     event.preventDefault()
@@ -38,20 +38,20 @@ class NoteForm extends React.Component{
     }
   }
 
-    handleTitleChange = (event) => {
-      this.setState({
-        title: event.target.value
-      }, () => console.log(this.state.title))
-
-    }
-
-
-    handleNoteChange = (event) => {
-      this.setState({
-        note: event.target.value
-      }, () => console.log(this.state.note))
-
-    }
+    // handleTitleChange = (event) => {
+    //   this.setState({
+    //     title: event.target.value
+    //   }, () => console.log(this.state.title))
+    //
+    // }
+    //
+    //
+    // handleNoteChange = (event) => {
+    //   this.setState({
+    //     note: event.target.value
+    //   }, () => console.log(this.state.note))
+    //
+    // }
 
   render() {
 

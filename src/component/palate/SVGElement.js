@@ -10,10 +10,10 @@ class SVGElement extends React.Component {
   componentDidMount = () => {
 
     //Creates object from svg created on first render.
-    console.log("props.id", this.props.id)
+    //console.log("props.id", this.props.id)
     const s = Snap(`#${this.props.id}`)
-    debugger
-    console.log("snapelement", s)
+    //debugger
+    //console.log("snapelement", s)
     let myCircle = s.circle(50,50,50).attr({ fill: this.props.fill, transform: this.props.position })
     myCircle.mouseover(() => this.props.hoverData(this.props.id))
     myCircle.drag( move, start, stop )
@@ -40,6 +40,7 @@ class SVGElement extends React.Component {
       myCircle.undblclick()
       myCircle.dblclick(() => this.props.deleteEl(myCircle, nextProps.id))
     } else {
+      myCircle.undrag()
       myCircle.undblclick()
       myCircle.dblclick(() => {handleGroup.remove(); addHandleFunc( myCircle, s, handleGroup, false)} )
     }
@@ -48,7 +49,7 @@ class SVGElement extends React.Component {
 
 
   render() {
-    console.log("elementrendering")
+    //console.log("elementrendering")
     return (
       <svg id={this.props.id} />
     )

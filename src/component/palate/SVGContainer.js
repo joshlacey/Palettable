@@ -14,12 +14,13 @@ class SVGContainer extends React.Component {
     currentHoverData: ""
   }
 
-componentDidMount = () => {
-  var test = Snap('#mainContainer')
-  test.attr({ viewBox: "0 0 400 400" })
-}
+// componentDidMount = () => {
+//   var test = Snap('#mainContainer')
+//   test.attr({ viewBox: "0 0 400 400" })
+// }
 
 componentWillUpdate(nextProps, nextState) {
+  //console.log(this.palate)
   if (nextState.save) {
     this.takeScreenShot()
     this.setState({save:false})
@@ -29,7 +30,7 @@ componentWillUpdate(nextProps, nextState) {
       this.props.removeCurrentColor()
     }
   if (nextProps.nextColors.length) {
-    console.log("nextColors", nextProps.nextColors)
+    //console.log("nextColors", nextProps.nextColors)
     nextProps.nextColors.forEach( (color, i) => {
       this.props.addToPalate({id: color.split('#')[1], fill: color, position: "" })
     })
@@ -46,26 +47,26 @@ toArray (obj) {
 }
 
 takeScreenShot = () => {
-  const palateCopy = document.getElementById('mainContainer').cloneNode(true)
+  //console.log("canuserefs", this.palate == document.getElementById('mainContainer'))
+  const palateCopy = this.palate.cloneNode(true)
   const children = this.toArray(palateCopy.childNodes)
-  children.shift()
-  children.shift()
   const html = children.join('')
   const content = Parser(html)
+  const filtered = content.filter(e => !e.type.match(/defs|desc/g) )
   let something
-  console.log(content)
-  if (!content.length) {
-    const before = content.props.children
+  //console.log(filtered)
+  if (!filtered.length) {
+    const before = filtered.props.children
     const sub = before.length ? before[before.length-1] : before
     const subsub = sub.props.children.length ? sub.props.children[0].props : sub.props.children.props
-    something = [{id: content.props.id, mode: true, size: sub.props.transform , fill: subsub.fill, position: subsub.transform}]
+    something = [{id: content.props.id.replace('id', ''), mode: true, size: sub.props.transform , fill: subsub.fill, position: subsub.transform}]
   } else {
-    something = content.map(element => {
+    something = filtered.map(element => {
     const before = element.props.children
-    console.log(element)
+    //console.log(element)
     const sub = before.length ? before[before.length-1] : before
     const subsub = sub.props.children.length ? sub.props.children[0].props : sub.props.children.props
-    return ({id: element.props.id, mode: true, size: sub.props.transform , fill: subsub.fill, position: subsub.transform})
+    return ({id: element.props.id.replace('id', ''), mode: true, size: sub.props.transform , fill: subsub.fill, position: subsub.transform})
   })
   }
   this.props.resetPalate(something)
@@ -89,7 +90,7 @@ deleteMode = () => {
 
 reorder = (circle, parentId) => {
 
-  const index = this.props.palateEls.findIndex( e => e.id == parentId )
+  const index = this.props.palateEls.findIndex( e => `id${e.id}` == parentId )
 
     function swapElement(array, indexA, indexB) {
       let tmp = array[indexA];
@@ -103,9 +104,9 @@ reorder = (circle, parentId) => {
 }
 
 deleteEl = ( circle, parentId ) => {
-  let index = this.props.palateEls.findIndex(e => e.id == parentId)
+  let index = this.props.palateEls.findIndex(e => `id${e.id}` == parentId)
   let copy = [...this.props.palateEls]
-  let newArr = copy.filter(el => el.id != parentId )
+  let newArr = copy.filter(el => `id${el.id}` != parentId )
   let color = copy[index].fill
   this.props.removeOneColor(color)
   this.props.resetPalate(newArr)
@@ -121,7 +122,7 @@ hexToRgb(hex) {
 }
 
 hoverData = (parentId) => {
-  const circle = this.props.palateEls.find(element => element.id == parentId)
+  const circle = this.props.palateEls.find(element => `id${element.id}` == parentId)
   const rgb = this.hexToRgb(circle.fill)
   this.setState({
     currentHoverData: `Hex Value: ${circle.fill}, RGB Value: ${rgb.r}, ${rgb.g}, ${rgb.b}`
@@ -141,15 +142,16 @@ saveSVG = () => {
 
 
   render () {
-    const elements = this.props.palateEls.map((e, i) => {console.log("what is being sent as the id", e.id); return <SVGElement key={e.id} hoverData={this.hoverData} reorder={this.reorder} deleteEl={this.deleteEl} reorderMode={this.state.reorderMode} deleteMode={this.state.deleteMode} id={e.id} fill={e.fill} size={e.size} position={e.position}/>})
-    const colors = this.props.colorsContainer.map((e, i) => <div key={e} style={{display: 'grid', backgroundColor: e, gridColumn: "1/2", width: '10px', height: '10px'}}/>)
+    console.log("container is rendering")
+    const elements = this.props.palateEls.map((e, i) => {console.log("what is being sent as the id", e.id); return <SVGElement key={`key${e.id}`} hoverData={this.hoverData} reorder={this.reorder} deleteEl={this.deleteEl} reorderMode={this.state.reorderMode} deleteMode={this.state.deleteMode} id={`id${e.id}`} fill={e.fill} size={e.size} position={e.position}/>})
+    const colors = this.props.colorsContainer.map((e, i) => <div key={`side${e}`} style={{display: 'grid', backgroundColor: e, gridColumn: "1/2", width: '10px', height: '10px'}}/>)
     return (
       <div id='#palateContainer'>
         <div style={{display: 'grid', gridTemplateColumns: "1fr 9fr"}}>
           <div>
             {colors}
           </div>
-          <svg style={{display: 'grid', gridColumn: '2/3'}} width={'400px'} height={'400px'} id={'mainContainer'} >
+          <svg ref={(palate) => this.palate = palate} style={{display: 'grid', gridColumn: '2/3'}} width={'400px'} height={'400px'} id={'mainContainer'} viewBox={"0 0 400 400"}>
             {elements}
           </svg>
         </div>

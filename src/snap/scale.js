@@ -3,9 +3,9 @@ export default function addHandleFunc(el, s, handleGroup, dragging) {
         if( dragging == false ) {
                 dragging = true;
                 var bb = el.getBBox();
-                var handle = s.circle(bb.x+bb.width, bb.y+bb.height/2, 10).attr({class: 'handler'});
+                var handle = s.rect(bb.x+bb.width, bb.y+bb.height/2, 10,10).attr({class: 'handler'});
                 handleGroup = s.group(el, handle);
-                console.log("handleGroup", handleGroup)
+                //console.log("handleGroup", handleGroup)
                 handleGroup.drag(moveAHF,startAHF,stopAHF);
         } else {
                 dragging = false;
