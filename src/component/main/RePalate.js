@@ -45,6 +45,8 @@ class RePalate extends React.Component {
     fetch(process.env.REACT_APP_API_ENDPOINT + this.props.location.pathname.slice(1))
       .then(resp =>  resp.json())
       .then(resp => {
+        console.log(resp)
+        const creator = resp.creator
         const title = resp.data.title
         const note = resp.data.note
         const html = resp.data.copy.join('')
@@ -54,7 +56,8 @@ class RePalate extends React.Component {
           palate: content,
           html: html,
           title: title,
-          note: note
+          note: note,
+          creator: creator
         })
         document.getElementById('rePalate').innerHTML = this.state.html
       })
@@ -75,6 +78,7 @@ class RePalate extends React.Component {
         </svg>
         <h1>{this.state.title}</h1>
         <p>{this.state.note}</p>
+        <p>{this.state.creator !== localStorage.getItem('username') ? `created by: ${this.state.creator}` : 'created by you'}</p>
       </div>
     )
   }
