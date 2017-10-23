@@ -147,7 +147,7 @@ saveSVG = () => {
           <div>
             {colors}
           </div>
-          <svg ref={(palate) => this.palate = palate} style={{display: 'grid', gridColumn: '2/3'}} width={'400px'} height={'400px'} id={'mainContainer'} viewBox={"0 0 400 400"}>
+          <svg ref={(palate) => this.palate = palate} style={{display: 'grid', gridColumn: '2/3', border: "1px solid grey"}} width={'400px'} height={'400px'} id={'mainContainer'} viewBox={"0 0 400 400"}>
             {elements}
           </svg>
         </div>

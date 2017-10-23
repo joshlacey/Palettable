@@ -9,8 +9,6 @@ String.prototype.replaceAll = function(search, replacement) {
     return target.replace(new RegExp(search, 'g'), replacement);
 };
 
-let stateChange
-
 class RePalate extends React.Component {
 
   state={
@@ -28,18 +26,18 @@ class RePalate extends React.Component {
     )
   }
 
-  doubleclick = (circle, outer) => {
-    const index = outer.state.palate.findIndex(e => e.props.id == circle.parent().node.id)
-
-    function swapElement(array, indexA, indexB) {
-      var tmp = array[indexA];
-      array[indexA] = array[indexB];
-      array[indexB] = tmp;
-    }
-    let copy = outer.state.palate
-    swapElement(copy, index, 0)
-    this.setState({palate: copy})
-  }
+  // doubleclick = (circle, outer) => {
+  //   const index = outer.state.palate.findIndex(e => e.props.id == circle.parent().node.id)
+  //
+  //   function swapElement(array, indexA, indexB) {
+  //     var tmp = array[indexA];
+  //     array[indexA] = array[indexB];
+  //     array[indexB] = tmp;
+  //   }
+  //   let copy = outer.state.palate
+  //   swapElement(copy, index, 0)
+  //   this.setState({palate: copy})
+  // }
 
   componentDidMount = () => {
     this.setState({loading: true})
@@ -73,7 +71,7 @@ class RePalate extends React.Component {
   render(){
     return(
       <div>
-        <svg width={'400px'} height={'400px'} id={'rePalate'} >
+        <svg style={{border: "1px solid grey"}} width={'400px'} height={'400px'} id={'rePalate'} >
         </svg>
         <h1>{this.state.title}</h1>
         <p>{this.state.note}</p>

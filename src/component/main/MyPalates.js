@@ -20,11 +20,24 @@ loading = () => {
   )
 }
 
+headers () {
+  return {
+    'content-type': 'application/json',
+    'accept': 'application/json',
+    'Authorization': localStorage.getItem('jwtToken')
+  }
+}
+
 componentDidMount = () => {
+  const params = {
+    method: 'GET',
+    headers: this.headers()
+  }
+  const userId = localStorage.getItem('userId')
   this.setState({loading: true})
-  fetch(process.env.REACT_APP_API_ENDPOINT + 'palates')
+  fetch(process.env.REACT_APP_API_ENDPOINT +'users/' + userId + '/palates', params)
     .then(resp => resp.json())
-    .then(resp => { this.setState({
+    .then(resp => { console.log(resp); this.setState({
       loading: false,
       palates: resp
     })})

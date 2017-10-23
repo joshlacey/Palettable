@@ -40,7 +40,6 @@ class SVGElement extends React.Component {
       myCircle.undblclick()
       myCircle.dblclick(() => this.props.deleteEl(myCircle, nextProps.id))
     } else {
-      myCircle.undrag()
       myCircle.undblclick()
       myCircle.dblclick(() => {handleGroup.remove(); addHandleFunc( myCircle, s, handleGroup, false)} )
     }
