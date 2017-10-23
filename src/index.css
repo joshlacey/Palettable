@@ -1,5 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great|Nosifer|Poiret+One|Waiting+for+the+Sunrise');
+
+/*font-family: 'Nosifer', cursive;
+font-family: 'Fredericka the Great', cursive;
+font-family: 'Waiting for the Sunrise', cursive;
+font-family: 'Poiret One', cursive;*/
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Poiret One', cursive;
+  color: white;
+  background-color: #2D6A86;
+}
+
+/***Navigation***/
+.navbar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  font-family: 'Waiting for the Sunrise', cursive;
+  font-size: 2em;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+}
+
+.navbar a:hover {
+  color: #DF8330;
+}
+
+/***Button***/
+
+.nice-button {
+  background-color: #192A4D;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  padding: 10px ;
+  font-family: 'Poiret One', cursive;
+  font-size: 1em;
+  margin: 5px;
+}
+
+.nice-button:hover {
+  background-color: #DF8330;
+}
+
+.nice-button:focus {
+  outline:none;
 }
