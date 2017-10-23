@@ -33,7 +33,8 @@ componentDidMount = () => {
   render() {
     const styling = {display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)'}
     const ps = this.state.palates
-    const palates = ps.length ? ps.map((p,i) => <Link key={i} to={`/palates/${p.id}`}><Palate key={i} svg={p.data.copy.join('')}/></Link>) : null
+    console.log("palates", ps)
+    const palates = ps.length ? ps.map((p,i) => <div><Link key={i} to={`/palates/${p.id}`}><Palate key={i} svg={p.data.copy.join('')}/> </Link><p>creator: {p.creator}</p></div>) : null
     return (
       <div style={styling}>
       { this.state.loading ? this.loading() : palates }

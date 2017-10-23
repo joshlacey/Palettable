@@ -92,14 +92,13 @@ reorder = (circle, parentId) => {
 
   const index = this.props.palateEls.findIndex( e => `id${e.id}` == parentId )
 
-    function swapElement(array, indexA, indexB) {
-      let tmp = array[indexA];
-      array[indexA] = array[indexB];
-      array[indexB] = tmp;
+    function rearrange(array, index) {
+      let toAdd = array.splice(index,1)
+      array.push(toAdd[0])
     }
 
   let copy = [...this.props.palateEls]
-  swapElement(copy, index, copy.length-1)
+  rearrange(copy, index)
   this.props.resetPalate(copy)
 }
 
@@ -134,7 +133,7 @@ saveSVG = () => {
   const children = this.toArray(palateCopy.childNodes)
   const elements = children.filter(e => (e !== "<desc>Created with Snap</desc>") && (e !== "<defs></defs>") )
   const id = localStorage.getItem('userId') ? localStorage.getItem('userId') : null
-  id ? this.props.savePalate(id, elements, this.props.title, this.props.note) : alert("you must be logged in to save.")
+  id ? this.props.savePalate(id, elements, this.props.title, this.props.note, this.props.colorsContainer) : alert("you must be logged in to save.")
 }
 
 

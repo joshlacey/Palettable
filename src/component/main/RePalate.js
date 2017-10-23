@@ -1,8 +1,10 @@
 import React from 'react';
 import Parser from 'html-react-parser'
 import Snap from 'snapsvg-cjs';
-//import addHandleFunc from '../../snap/scale.js'
+import { connect } from 'react-redux'
+import { deletePalate } from '../../actions/userServices'
 import { start, move, stop } from '../../snap/dragCallbacks.js'
+import { Link, Redirect } from 'react-router-dom'
 
 String.prototype.replaceAll = function(search, replacement) {
     var target = this;
@@ -11,9 +13,11 @@ String.prototype.replaceAll = function(search, replacement) {
 
 class RePalate extends React.Component {
 
-  state={
+  state = {
     loading:false,
-    palate: []
+    palate: [],
+    html: "",
+    colors: []
   }
 
   loading = () => {
@@ -26,19 +30,6 @@ class RePalate extends React.Component {
     )
   }
 
-  // doubleclick = (circle, outer) => {
-  //   const index = outer.state.palate.findIndex(e => e.props.id == circle.parent().node.id)
-  //
-  //   function swapElement(array, indexA, indexB) {
-  //     var tmp = array[indexA];
-  //     array[indexA] = array[indexB];
-  //     array[indexB] = tmp;
-  //   }
-  //   let copy = outer.state.palate
-  //   swapElement(copy, index, 0)
-  //   this.setState({palate: copy})
-  // }
-
   componentDidMount = () => {
     this.setState({loading: true})
     const s = Snap(`#rePalate`)
@@ -46,42 +37,68 @@ class RePalate extends React.Component {
       .then(resp =>  resp.json())
       .then(resp => {
         console.log(resp)
-        const creator = resp.creator
-        const title = resp.data.title
-        const note = resp.data.note
         const html = resp.data.copy.join('')
-        const content = Parser(html)
+        const cleaned = html.replaceAll('style=""', '')
+        const content = Parser(cleaned)
         this.setState({
           loading: false,
-          palate: content,
-          html: html,
-          title: title,
-          note: note,
-          creator: creator
-        })
-        document.getElementById('rePalate').innerHTML = this.state.html
-      })
-      .then(()=> {
-        this.state.palate.forEach( i => {
-          const element = Snap(`#${i.props.id}`)
-          const circle = element.children().find(c => !c.type.match(/desc|defs/g))
-          circle.drag( move, start, stop )
-          circle.dblclick(() => this.doubleclick(circle, this))
+          palate: content.length ? content : [content],
+          html: resp.data.copy.join(''),
+          title: resp.data.title,
+          note: resp.data.note,
+          creator: resp.creator,
+          colors: resp.data.colors.split(',')
         })
       })
   }
 
+componentDidUpdate = (prevState, prevProps) => {
+    if (this.state.palate.length) {
+      this.state.palate.forEach( i => {
+        const element = Snap(`#${i.props.id}`)
+        const circle = element.children().find(c => !c.type.match(/desc|defs/g))
+        circle.drag( move, start, stop )
+      })
+    }
+}
+
+hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? `( ${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)} )` : null;
+}
+
+  handleClick = (event) => {
+    const id = event.target.baseURI.split('/palates/')[1]
+    this.props.deletePalate(id)
+    alert("Palate Deleted")
+  }
+
   render(){
+    const user = localStorage.getItem('username')
+    console.log(this.state.palate)
+    const palateColors = this.state.colors.length ? this.state.colors.map(color => <div style={{backgroundColor: color}}>Hex Value: {color.toUpperCase()}, RGB Value: {this.hexToRgb(color)}</div>) : null
     return(
       <div>
         <svg style={{border: "1px solid grey"}} width={'400px'} height={'400px'} id={'rePalate'} >
+          {this.state.palate}
         </svg>
         <h1>{this.state.title}</h1>
         <p>{this.state.note}</p>
         <p>{this.state.creator !== localStorage.getItem('username') ? `created by: ${this.state.creator}` : 'created by you'}</p>
+
+        {localStorage.getItem('jwtToken') ? <Link to={`/${user}/palates`}><button props={this.props} onClick={this.handleClick}>Delete Your Palate</button></Link> : null }
+        {palateColors}
       </div>
     )
   }
 }
+
+function mapDispatchToProps (dispatch) {
+  return {
+      deletePalate: (id) => {
+        dispatch(deletePalate(id))
+      }
+    }
+}
 //{ this.state.loading ? this.loading() : svg }
-export default RePalate
+export default connect(null, mapDispatchToProps)(RePalate)

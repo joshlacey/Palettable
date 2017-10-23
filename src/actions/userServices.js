@@ -51,3 +51,61 @@ export function createUser(signupParams) {
     })
   }
 }
+
+function headers () {
+  return {
+    'content-type': 'application/json',
+    'accept': 'application/json',
+    'Authorization': localStorage.getItem('jwtToken')
+  }
+}
+
+function loadingPalates () {
+  return {
+    type: 'LOADING'
+  }
+}
+
+// export function deletedItem () {
+//   return {
+//     type: 'DELETED_ITEM'
+//   }
+// }
+
+export function deletePalate(id) {
+  return function (dispatch) {
+    dispatch(loadingPalates())
+    const userId = localStorage.getItem('userId')
+    const params = {
+      method: 'DELETE',
+      body: JSON.stringify({id: id, userId: userId}),
+      headers: headers()
+    }
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}palates/` + id + '/delete', params)
+    .then(res => res.json())
+    .then(res => dispatch(updateMyPalates(res)))
+  }
+}
+
+function updateMyPalates(palates) {
+  return {
+    type: "UPDATE_MY_PALATES",
+    payload: palates
+  }
+}
+
+export function getMyPalates() {
+  return function (dispatch) {
+    dispatch(loadingPalates())
+    const params = {
+      method: 'GET',
+      headers: headers()
+    }
+    const userId = localStorage.getItem('userId')
+    fetch(process.env.REACT_APP_API_ENDPOINT +'users/' + userId + '/palates', params)
+      .then(resp => resp.json())
+      .then(resp => {
+        dispatch(updateMyPalates(resp))
+      })
+  }
+}

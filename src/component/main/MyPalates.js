@@ -1,14 +1,10 @@
 import React from 'react';
 import Palate from './Palate'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { getMyPalates } from '../../actions/userServices'
 
-
-class Palates extends React.Component {
-
-state={
-  loading:false,
-  palates: []
-}
+class MyPalates extends React.Component {
 
 loading = () => {
   return(
@@ -20,39 +16,36 @@ loading = () => {
   )
 }
 
-headers () {
-  return {
-    'content-type': 'application/json',
-    'accept': 'application/json',
-    'Authorization': localStorage.getItem('jwtToken')
-  }
-}
-
 componentDidMount = () => {
-  const params = {
-    method: 'GET',
-    headers: this.headers()
-  }
-  const userId = localStorage.getItem('userId')
-  this.setState({loading: true})
-  fetch(process.env.REACT_APP_API_ENDPOINT +'users/' + userId + '/palates', params)
-    .then(resp => resp.json())
-    .then(resp => { console.log(resp); this.setState({
-      loading: false,
-      palates: resp
-    })})
+  this.props.getMyPalates()
 }
 
   render() {
     const styling = {display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)'}
-    const ps = this.state.palates
+    const ps = this.props.palates
     const palates = ps.length ? ps.map((p,i) => <Link key={i} to={`/palates/${p.id}`}><Palate key={i} svg={p.data.copy.join('')}/></Link>) : null
     return (
       <div style={styling}>
-      { this.state.loading ? this.loading() : palates }
+      { this.props.loading ? this.loading() : palates }
       </div>
     )
   }
 }
 
-export default Palates
+function mapStateToProps (state) {
+  return {
+    updateAfterDelete: state.user.updateAfterDelete,
+    palates: state.user.palates,
+    loading: state.user.loading
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    getMyPalates: () => {
+      dispatch(getMyPalates())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyPalates)

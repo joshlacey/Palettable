@@ -39,8 +39,6 @@ class RePalate extends React.Component {
     if (this.state.palate === '') {
       svg = ""
     } else {
-      console.log(this.props.location.pathname)
-      console.log(this.state)
       const string = this.state.palate.data.svg
       const temp = string.replaceAll('style=""', '')
       svg = Parser(temp)
