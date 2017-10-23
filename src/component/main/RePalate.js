@@ -47,19 +47,23 @@ class RePalate extends React.Component {
     fetch(process.env.REACT_APP_API_ENDPOINT + this.props.location.pathname.slice(1))
       .then(resp =>  resp.json())
       .then(resp => {
+        const title = resp.data.title
+        const note = resp.data.note
         const html = resp.data.copy.join('')
         const content = Parser(html)
         this.setState({
           loading: false,
           palate: content,
-          html: html
+          html: html,
+          title: title,
+          note: note
         })
         document.getElementById('rePalate').innerHTML = this.state.html
       })
       .then(()=> {
         this.state.palate.forEach( i => {
           const element = Snap(`#${i.props.id}`)
-          const circle = element.children()[0]
+          const circle = element.children().find(c => !c.type.match(/desc|defs/g))
           circle.drag( move, start, stop )
           circle.dblclick(() => this.doubleclick(circle, this))
         })
@@ -71,6 +75,8 @@ class RePalate extends React.Component {
       <div>
         <svg width={'400px'} height={'400px'} id={'rePalate'} >
         </svg>
+        <h1>{this.state.title}</h1>
+        <p>{this.state.note}</p>
       </div>
     )
   }

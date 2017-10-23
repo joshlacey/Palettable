@@ -132,9 +132,9 @@ hoverData = (parentId) => {
 saveSVG = () => {
   const palateCopy = this.palate.cloneNode(true)
   const children = this.toArray(palateCopy.childNodes)
-  //const elements = children.filter(e => !e.match(/<desc>Created with Snap<\/desc>|<defs><\/defs>/g))
+  const elements = children.filter(e => (e !== "<desc>Created with Snap</desc>") && (e !== "<defs></defs>") )
   const id = localStorage.getItem('userId') ? localStorage.getItem('userId') : null
-  id ? this.props.savePalate(id, children, this.props.title, this.props.note) : alert("you must be logged in to save.")
+  id ? this.props.savePalate(id, elements, this.props.title, this.props.note) : alert("you must be logged in to save.")
 }
 
 
