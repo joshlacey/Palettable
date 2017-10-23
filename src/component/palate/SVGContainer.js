@@ -133,15 +133,13 @@ saveSVG = () => {
   const palateCopy = this.palate.cloneNode(true)
   const children = this.toArray(palateCopy.childNodes)
   //const elements = children.filter(e => !e.match(/<desc>Created with Snap<\/desc>|<defs><\/defs>/g))
-  console.log("elements",children)
   const id = localStorage.getItem('userId') ? localStorage.getItem('userId') : null
   id ? this.props.savePalate(id, children, this.props.title, this.props.note) : alert("you must be logged in to save.")
 }
 
 
   render () {
-    console.log("container is rendering")
-    const elements = this.props.palateEls.map((e, i) => {console.log("what is being sent as the id", e.id); return <SVGElement key={`key${e.id}`} hoverData={this.hoverData} reorder={this.reorder} deleteEl={this.deleteEl} reorderMode={this.state.reorderMode} deleteMode={this.state.deleteMode} id={`id${e.id}`} fill={e.fill} size={e.size} position={e.position}/>})
+    const elements = this.props.palateEls.map((e, i) =>  <SVGElement key={`key${e.id}`} hoverData={this.hoverData} reorder={this.reorder} deleteEl={this.deleteEl} reorderMode={this.state.reorderMode} deleteMode={this.state.deleteMode} id={`id${e.id}`} fill={e.fill} size={e.size} position={e.position}/>)
     const colors = this.props.colorsContainer.map((e, i) => <div key={`side${e}`} style={{display: 'grid', backgroundColor: e, gridColumn: "1/2", width: '10px', height: '10px'}}/>)
     return (
       <div id='#palateContainer'>

@@ -7,12 +7,10 @@ export default function palateReducer(state={ palate: "", screenShot: false, sav
     case "UPDATE_PALATE":
         return {...state, current: action.payload }
     case "ADD_TO_PALATE":
-        console.log("addtopallateotherpalate", action.payload)
         const somethingelse = [...state.otherPalate, action.payload]
         const something = {...state, otherPalate: somethingelse }
         return something
     case "RESET_PALATE":
-        console.log("resettingpalate")
         return {...state, otherPalate: action.payload }
     case "SCREENSHOT":
         return {...state, screenShot: !state.screenShot}

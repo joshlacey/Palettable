@@ -23,20 +23,20 @@ class NoteForm extends React.Component{
   //   }
 
 
-  handleTitleChange(event) {
-    return {
-      type: "TITLE",
-      payload: event.target.value
-    }
-  }
-
-
-  handleNoteChange = (event) => {
-    return {
-      type: "NOTE",
-      payload: event.target.value
-    }
-  }
+  // handleTitleChange(event) {
+  //   return {
+  //     type: "TITLE",
+  //     payload: event.target.value
+  //   }
+  // }
+  //
+  //
+  // handleNoteChange = (event) => {
+  //   return {
+  //     type: "NO TE",
+  //     payload: event.target.value
+  //   }
+  // }
 
     // handleTitleChange = (event) => {
     //   this.setState({
