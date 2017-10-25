@@ -158,7 +158,7 @@ saveSVG = () => {
     const elements = this.props.palateEls.map((e, i) =>  <SVGElement key={`key${e.id}`} hoverData={this.hoverData} reorder={this.reorder} deleteEl={this.deleteEl} reorderMode={this.state.reorderMode} deleteMode={this.state.deleteMode} id={`id${e.id}`} fill={e.fill} size={e.size} position={e.position}/>)
     //const colors = this.props.colorsContainer.map((e, i) => <ColorItemComp height={'20px'} color={e}/>)
     return (
-      <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', justifyContent: 'center', gridGap: '1em'}}id='#palateContainer'>
+      <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', justifyContent: 'center', gridGap: '1em'}} id='#palateContainer'>
         <div style={{gridColumn: '1/4', marginLeft: 'auto', marginRight: 'auto'}}>
           <svg ref={(palate) => this.palate = palate} style={{display: 'grid', gridColumn: '1/2', border: "1px solid #ccc"}} width={'400px'} height={'400px'} id={'mainContainer'} viewBox={"0 0 400 400"}>
             {elements}

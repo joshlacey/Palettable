@@ -104,3 +104,28 @@ export function handleNoteChange (event) {
     payload: event.target.value
   }
 }
+
+
+// export function updatePalate (title, note) {
+//   return function(dispatch) {
+//     const body = {user_id: userId,
+//             palate_data: { copy: copy, title: title, note: note, colors: colors.join(',') }
+//           }
+//     const params = {
+//       method: 'POST',
+//       headers: headers(),
+//       body: JSON.stringify(body)
+//     }
+//
+//     fetch(process.env.REACT_APP_API_ENDPOINT + 'palates/' + palateId + '/palates/edit, params)
+//       .then((res) => res.json())
+//       .then((json) => {
+//         if (json){
+//           dispatch(savedPalate(json))
+//         } else {
+//           alert("didn't work")
+//         }
+//       })
+//   }
+//   }
+// }

@@ -80,7 +80,7 @@ render () {
           </div>
           <ChromePicker disableAlpha={true} color={this.state.pickerColor} onChangeComplete={this.handleSlider}/>
         </div>
-        <button style={{width: '100%'}} className={'nice-button'} onClick={this.submitColors}>Submit Colors</button>
+        <button style={{width: '100%', marginTop: '15px'}} className={'nice-button'} onClick={this.submitColors}>Submit Colors</button>
       </div>
   )
 }

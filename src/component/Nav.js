@@ -7,17 +7,21 @@ class Nav extends React.Component {
 
   componentDidMount = () => {
     const navItems = document.querySelectorAll('.nav-wrapper')
-    navItems.forEach(c => c.addEventListener('mouseenter', this.hoverin))
-    navItems.forEach(c => c.addEventListener('mouseleave', this.hoverout))
+    if(!!navigator.userAgent.match(/iPad/g)) {
+      null
+    } else {
+      navItems.forEach(c => c.addEventListener('mouseenter', this.hoverin))
+      navItems.forEach(c => c.addEventListener('mouseleave', this.hoverout))
+    }
   }
 
   hoverin (event) {
-    event.target.children[0].style.transform="translate(-40px, 0)"
-    event.target.children[2].style.transform="translate(40px, 0)"
+    event.target.children[1].style.transform="translate(60px, 30px)"
+    event.target.children[2].style.transform="translate(120px, 60px)"
   }
 
   hoverout (event) {
-    event.target.children[0].style.transform="translate(0, 0)"
+    event.target.children[1].style.transform="translate(0, 0)"
     event.target.children[2].style.transform="translate(0, 0)"
   }
 
@@ -27,14 +31,19 @@ class Nav extends React.Component {
     return(
       <div className={'navbar'} >
         <Link to='/palates'>
-          <NavItem title={'Palates'}/>
+          <div className={'nav-wrapper'}>
+            <p className={'overlap text'}>Palatable</p>
+            <p className={'overlap text2'}>Palatable</p>
+            <p className={'overlap text3'}>Palatable</p>
+          </div>
         </Link>
         <Link to='/edit'>
-          <NavItem title={'Create New'}/>
+          <div className={'nav-item nav-item-red'}>Create New</div>
         </Link>
-        {hasToken ? <Link to='/logout'><NavItem title={'Logout'}/></Link> : <Link to='/login'><NavItem title={'Login'}/></Link> }
-        {hasToken ? null : <Link to='/signup'><NavItem title={'Signup'}/></Link> }
-        {hasToken ? <Link to={`/${username}/palates`}><NavItem title={'Your Palates'}/></Link> : null }
+        {hasToken ? <Link to={`/${username}/palates`}><div className={'nav-item nav-item-green'}>Your Palates</div></Link> : null }
+        {hasToken ? <Link to='/logout'><div className={'nav-item nav-item-blue'}>Logout</div></Link> : <Link to='/login'><div className={'nav-item nav-item-green'}>Login</div></Link> }
+        {hasToken ? null : <Link to='/signup'><div className={'nav-item nav-item-blue'}>Signup</div></Link> }
+
       </div>
     )
   }

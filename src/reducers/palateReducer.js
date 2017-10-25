@@ -1,4 +1,4 @@
-export default function palateReducer(state={ palate: "", screenShot: false, saving: false, current: [], otherPalate: [] }, action) {
+export default function palateReducer(state={ palate: "", title: "", note: "", screenShot: false, saving: false, current: [], otherPalate: [] }, action) {
   switch (action.type) {
     case "PALATE_SAVED":
         return {...state, palate: action.payload, saving: false, title: "", note: "" }
@@ -18,6 +18,8 @@ export default function palateReducer(state={ palate: "", screenShot: false, sav
         return {...state, title: action.payload }
     case "NOTE":
         return {...state, note: action.payload}
+    // case "UPDATE_TITLE_NOTE":
+    //     return {...state, note: "", title: ""}
     default:
       return state
   }

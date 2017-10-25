@@ -17,9 +17,8 @@ class Palate extends React.Component {
 
     return(
       <div className={"main-palate-items"}>
-        <div>
-        </div>
-        <svg width={'100%'} height={'auto'} id={'rePalate'} >
+        <div></div>
+        <svg height='auto' id={'rePalate'} >
           {svg}
         </svg>
       </div>

@@ -3,6 +3,9 @@ import Palate from './Palate'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getMyPalates } from '../../actions/userServices'
+// import { updatePalate } from '../../actions/palate'
+import '../../index.css'
+// import NoteForm from '../notes/NoteForm'
 
 class MyPalates extends React.Component {
 
@@ -23,7 +26,7 @@ componentDidMount = () => {
   render() {
     const styling = {display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)'}
     const ps = this.props.palates
-    const palates = ps.length ? ps.map((p,i) => <Link key={i} to={`/palates/${p.id}`}><Palate key={i} svg={p.data.copy.join('')}/></Link>) : null
+    const palates = ps.length ? ps.map((p,i) => <Link key={i} to={`/palates/${p.id}`}><Palate key={i} svg={p.data.copy.join('')}/><p style={{color: '#ccc'}}>{p.data.title}</p></Link>) : null
     return (
       <div className={'main-palates-wrapper'}>
       { this.props.loading ? this.loading() : palates }
@@ -36,7 +39,9 @@ function mapStateToProps (state) {
   return {
     updateAfterDelete: state.user.updateAfterDelete,
     palates: state.user.palates,
-    loading: state.user.loading
+    loading: state.user.loading,
+    // note: state.palate.note,
+    // title: state.palate.title
   }
 }
 
@@ -44,7 +49,10 @@ function mapDispatchToProps (dispatch) {
   return {
     getMyPalates: () => {
       dispatch(getMyPalates())
-    }
+    },
+    // updatePalate: (title, note) => {
+    //   dispatch(updatePalate(title, note))
+    // }
   }
 }
 

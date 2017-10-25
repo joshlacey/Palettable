@@ -13,6 +13,7 @@ body {
 
 a:link {
   text-decoration: none;
+  color: #ccc;
 }
 
 textarea:focus, input:focus {
@@ -25,6 +26,8 @@ textarea {
 }
 
 textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
+
+
 /***Navigation***/
 
 .navbar {
@@ -33,20 +36,17 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
   font-family: 'Droid Sans', sans-serif;
   grid-gap: 1em;
   font-weight: bold;
-  font-size: 1.1em;
+  font-size: 1em;
   white-space: nowrap;
 }
 
 .nav-wrapper {
   display:grid;
   grid-template-columns: 1fr;
-  text-align: center;
-  border: 1px solid #ccc;
+  text-align: left;
+  font-size: 3em;
+  /*border: 1px solid #ccc;*/
   transition: .75s ease-in-out;
-}
-
-.nav-wrapper:hover {
-  border: 1px solid black;
 }
 
 .overlap {
@@ -55,25 +55,51 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
 }
 
 .text {
+  margin-top: 0;
   color: rgba(255, 0, 0, .33);
-  transition: .75s ease-in-out;
 }
 
 .text2 {
+  margin-top: 0;
   color: rgba(0, 255, 0, .33);
+  transition: .75s ease-in-out;
 }
 
 .text3 {
+  margin-top: 0;
   color: rgba(0, 0, 255, .33);
   transition: .75s ease-in-out;
 }
 
-/***Button***/
+.nav-item {
+  border: 1px solid #ccc;
+  text-align: center;
+  padding: 10px;
+  transition: .5s ease-in-out;
+  color: #ccc;
+  margin-top: 15px;
+}
 
-/*.palate-button {
-  width: 70%;
+/*.nav-item:hover {
+  color: white;
+}
 
+.nav-item-red:hover {
+  background-color: rgba(255,0,0,.5);
+  border: 1px solid rgba(255,0,0,1);
+}
+
+.nav-item-green:hover {
+  background-color: rgba(0,255,0,.5);
+  border: 1px solid rgba(0,255,0,1);
+}
+
+.nav-item-blue:hover {
+  background-color: rgba(0,0,255,.5);
+  border: 1px solid rgba(0,0,255,1);
 }*/
+
+/***Button***/
 
 .nice-button {
   background-color: #fff;
@@ -85,10 +111,11 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
   transition: .5s ease-in-out;
 }
 
-.nice-button:hover {
+/*.nice-button:hover {
   color: #fff;
   background-color: rgba(0, 255, 0, .5);
-}
+  border: 1px solid rgba(0, 255, 0, 1);
+}*/
 
 .nice-button:focus {
   outline:none;
@@ -105,10 +132,11 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
   transition: .5s ease-in-out;
 }
 
-.mean-button:hover {
+/*.mean-button:hover {
   color: #fff;
   background-color: rgba(255, 0, 0, .75);
-}
+  border: 1px solid rgba(255, 0, 0, 1);
+}*/
 
 .mean-button:focus {
   outline:none;
@@ -124,34 +152,35 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
     text-align: center;
 }
 
-.main-palate-item-wrapper {
-
-}
 
 .main-palate-items {
   display: grid;
   grid-template-columns: 1fr;
-  border: 1px solid #ccc;
 }
 
 .main-palate-items>div {
-  width: 100%;
+  width: 400px;
+  margin: 0 auto;
   height: 400px;
   grid-column: 1/2;
   grid-row: 1/2;
   background-color: rgba(255,255,255,.5);
   z-index: 2;
   transition: .5s ease-in-out;
+  border: 1px solid #ccc;
 }
 
-.main-palate-items>div:hover {
+/*.main-palate-items>div:hover {
   background-color: rgba(255,255,255, 0);
   z-index: 0;
-}
+}*/
 
 .main-palate-items>svg {
   grid-column: 1/2;
   grid-row: 1/2;
+  display: block;
+  margin: 0 auto;
+  width: 400px;
 }
 
 /***Repalate***/
@@ -172,10 +201,10 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
   margin-top: 20px;
 }
 
-.color-item-wrapper:hover {
+/*.color-item-wrapper:hover {
   border: 1px solid #ccc;
   color: black;
-}
+}*/
 
 .color-item-wrapper>div {
   float: left;
@@ -192,15 +221,14 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
 .svg-edit {
   padding: 2em;
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-gap: 2em;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 4em;
   grid-auto-rows: minmax(200px, auto);
 }
 
 /***NoteForm***/
 
 .note-form {
-  width: 80%;
   margin: 0 auto 0;
 }
 
@@ -253,22 +281,95 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
   transition: .5s ease-in-out;
 }
 
-.login-form:hover {
+/*.login-form:hover {
   border: 1px solid black;
-}
+}*/
 
 .login-form>h1 {
   transition: .5s ease-in-out;
 }
 
-.login-form>h1:hover {
+/*.login-form>h1:hover {
   color: black;
-}
+}*/
 
 
 .login-form>input {
   margin-bottom: 20px;
   padding: 5px;
+}
+
+@media (hover: hover) {
+
+  .nav-item:hover {
+    color: white;
+  }
+
+  .nav-item-red:hover {
+    background-color: rgba(255,0,0,.5);
+    border: 1px solid rgba(255,0,0,1);
+  }
+
+  .nav-item-green:hover {
+    background-color: rgba(0,255,0,.5);
+    border: 1px solid rgba(0,255,0,1);
+  }
+
+  .nav-item-blue:hover {
+    background-color: rgba(0,0,255,.5);
+    border: 1px solid rgba(0,0,255,1);
+  }
+
+  .nice-button:hover {
+    color: #fff;
+    background-color: rgba(0, 255, 0, .5);
+    border: 1px solid rgba(0, 255, 0, 1);
+  }
+
+  .mean-button:hover {
+    color: #fff;
+    background-color: rgba(255, 0, 0, .75);
+    border: 1px solid rgba(255, 0, 0, 1);
+  }
+
+  .main-palate-items>div:hover {
+    background-color: rgba(255,255,255, 0);
+    z-index: 0;
+  }
+
+  .color-item-wrapper:hover {
+    border: 1px solid #ccc;
+    color: black;
+  }
+
+  .login-form:hover {
+    border: 1px solid black;
+  }
+
+  .login-form>h1:hover {
+    color: black;
+  }
+
+}
+
+
+/***FOR IPAD***/
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+  .main-palates-wrapper {
+      grid-template-columns: repeat(2, 1fr);
+  }
+
+  .svg-edit {
+    grid-template-columns: 1fr;
+  }
+
+  .main-palate-items>div {
+    width: 100%;
+  }
+  .main-palate-items>svg {
+    width: 100%;
+  }
 }
 
 /***Reset***/
