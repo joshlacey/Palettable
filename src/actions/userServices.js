@@ -19,8 +19,20 @@ export function loginUser(loginParams) {
   })
     .then((res) => res.json())
     .then((user) => {
-      user.jwt !== undefined ? setLocalStorage(user) : null
+      if(user.message) {
+        alert(user.message)
+      } else {
+        user.jwt !== undefined ? setLocalStorage(user) : null
+        dispatch(loggedIn(user))
+      }
     })
+  }
+}
+
+function loggedIn(user) {
+  return {
+    type: "LOGGED_IN",
+    payload: user
   }
 }
 
@@ -45,6 +57,7 @@ export function createUser(signupParams) {
     .then((user) => {
       if (user.jwt !== undefined){
         setLocalStorage(user)
+        dispatch(loggedIn(user))
       } else {
         alert(user.message)
       }

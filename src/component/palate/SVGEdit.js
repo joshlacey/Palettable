@@ -4,19 +4,19 @@ import ImageUploader from '../uploader/ImageUploader';
 import ColorsContainer from '../uploader/ColorsContainer';
 import NoteForm from '../notes/NoteForm'
 import ColorTabs from './ColorTabs'
+import '../../index.css'
 
 class EditContainer extends React.Component {
 
   render () {
-    const styling = {padding: '2em', display: 'grid', gridTemplateColumns: '2fr 1fr', gridGap: '1em', gridAutoRows: 'minmax(auto, 200px)'}
+
     return (
-      <div style={styling}>
+      <div className={'svg-edit'}>
 
           <SVGContainer />
 
           <div>
             <ImageUploader />
-            <p style={{fontSize: '70%'}}>google image: https://wallpaperscraft.com/image/google_search_logo_summer_drawing_26168_602x339.jpg</p>
             <ColorsContainer />
           </div>
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { uploadImage, searchColors } from '../../actions/uploader'
 import { connect } from 'react-redux'
+import '../../index.css'
 
 class ImageUploader extends React.Component {
 
@@ -28,10 +29,10 @@ class ImageUploader extends React.Component {
   render() {
 
     return (
-      <div>
+      <div className={'image-form'}>
         <form onSubmit={this.handleSubmit}>
-          <input style={{width: '65%', padding: '10px', float: 'left', margin: '5px'}} onChange={this.handleChange} placeholder={'Image Url'}/>
-          <button style={{width: '25%', float: 'right'}} className={'nice-button'} type='sumit'>Submit</button>
+          <input onChange={this.handleChange} placeholder={'Image URL'}/>
+          <button className={'nice-button'} type='submit'>Sample ></button>
         </form>
       </div>
     )

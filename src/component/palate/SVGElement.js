@@ -17,7 +17,17 @@ class SVGElement extends React.Component {
     myCircle.drag( move, start, stop )
     let handleGroup = s.group(myCircle)
     handleGroup.attr({ transform: this.props.size })
-    myCircle.dblclick(() => {handleGroup.remove(); addHandleFunc( myCircle, s, handleGroup, false)} )
+    //myCircle.dblclick(() => {handleGroup.remove(); addHandleFunc( myCircle, s, handleGroup, false)} )
+
+
+    if(this.props.reorderMode) {
+      myCircle.dblclick(() => this.props.reorder(myCircle, this.props.id))
+    } else if (this.props.deleteMode) {
+      myCircle.dblclick(() => this.props.deleteEl(myCircle, this.props.id))
+    } else {
+      myCircle.dblclick(() => {handleGroup.remove(); addHandleFunc( myCircle, s, handleGroup, false)} )
+    }
+
   }
 
   componentWillReceiveProps = (nextProps) => {
@@ -46,9 +56,9 @@ class SVGElement extends React.Component {
 
 
   render() {
-
+    //console.log('addedElement', "delete?", nextProps.reorderMode)
     return (
-      <svg id={this.props.id} />
+      <svg style={{cursor: 'pointer'}} id={this.props.id} />
     )
   }
 }

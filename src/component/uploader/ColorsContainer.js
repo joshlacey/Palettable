@@ -62,10 +62,16 @@ componentDidMount () {
   document.querySelector('.chrome-picker').style = "background: rgb(255, 255, 255); border: 1px solid #ccc; border-radius: 2px; box-sizing: initial; width: 100%; font-family: Menlo;"
 }
 
+loadingColors () {
+  return (
+    <div style={{margin: '30% auto'}}>{loading()}</div>
+  )
+}
+
 render () {
   const colors = this.props.colors.length ? this.props.colors.map((c, i) => <ColorItem id={i} key={i} addColor={this.addColor} deleteColor={this.deleteColor}
           style={{width: '100%', height: '30px', backgroundColor: `rgb(${c.color.red},${c.color.green},${c.color.blue})`}}/> ) : null
-  const wrapperStyle = this.props.colors.length ? {display: 'grid', gridTemplateColumns: '1fr 1fr', marginBottom: '5px'} : {}
+  const wrapperStyle = (this.props.colors.length || this.props.loading) ? {display: 'grid', gridTemplateColumns: '2fr 3fr', marginBottom: '5px', gridGap: '5px'} : {}
   return(
       <div>
         <div style={wrapperStyle}>

@@ -13,7 +13,6 @@ class SignupForm extends React.Component{
   handleSubmit = (event) => {
       event.preventDefault()
       const signupParams = { username: this.state.username, password: this.state.password}
-      console.log('signupForm', signupParams)
       this.props.signUp(signupParams)
       this.setState({
         username: "",
@@ -41,10 +40,11 @@ class SignupForm extends React.Component{
 
   render() {
     return(
-      <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="username" onChange={this.handleUsernameChange} value={this.state.username}/>
-          <input type="password" placeholder="password" onChange={this.handlePasswordChange} value={this.state.password}/>
-          <input type="submit" value="Submit"/>
+      <form className={'login-form'} onSubmit={this.handleSubmit}>
+          <h1>signup</h1>
+          <input type="text" placeholder="username" onChange={this.handleUsernameChange} value={this.state.username}/><br/>
+          <input type="password" placeholder="password" onChange={this.handlePasswordChange} value={this.state.password}/><br/>
+          <button className={'nice-button'} type="submit">Submit</button>
         </form>
     )
   }

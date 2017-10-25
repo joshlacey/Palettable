@@ -49,26 +49,30 @@ toArray (obj) {
 }
 
 takeScreenShot = () => {
-  const palateCopy = this.palate.cloneNode(true)
-  const children = this.toArray(palateCopy.childNodes)
-  const html = children.join('')
-  const content = Parser(html)
-  const filtered = content.filter(e => !e.type.match(/defs|desc/g) )
-  let something
-  if (!filtered.length) {
-    const before = filtered.props.children
-    const sub = before.length ? before[before.length-1] : before
-    const subsub = sub.props.children.length ? sub.props.children[0].props : sub.props.children.props
-    something = [{id: content.props.id.replace('id', ''), mode: true, size: sub.props.transform , fill: subsub.fill, position: subsub.transform}]
+  if([...this.palate.childNodes].filter(e => e.nodeName === "svg").length) {
+    const palateCopy = this.palate.cloneNode(true)
+    const children = this.toArray(palateCopy.childNodes)
+    const html = children.join('')
+    const content = Parser(html)
+    const filtered = content.filter(e => !e.type.match(/defs|desc/g) )
+    let something
+    if (!filtered.length) {
+      const before = filtered.props.children
+      const sub = before.length ? before[before.length-1] : before
+      const subsub = sub.props.children.length ? sub.props.children[0].props : sub.props.children.props
+      something = [{id: content.props.id.replace('id', ''), mode: true, size: sub.props.transform , fill: subsub.fill, position: subsub.transform}]
+    } else {
+      something = filtered.map(element => {
+      const before = element.props.children
+      const sub = before.length ? before[before.length-1] : before
+      const subsub = sub.props.children.length ? sub.props.children[0].props : sub.props.children.props
+      return ({id: element.props.id.replace('id', ''), mode: true, size: sub.props.transform , fill: subsub.fill, position: subsub.transform})
+    })
+    }
+    this.props.resetPalate(something)
   } else {
-    something = filtered.map(element => {
-    const before = element.props.children
-    const sub = before.length ? before[before.length-1] : before
-    const subsub = sub.props.children.length ? sub.props.children[0].props : sub.props.children.props
-    return ({id: element.props.id.replace('id', ''), mode: true, size: sub.props.transform , fill: subsub.fill, position: subsub.transform})
-  })
+    this.props.resetPalate([])
   }
-  this.props.resetPalate(something)
 }
 
 reorderMode = () => {
@@ -150,6 +154,7 @@ saveSVG = () => {
 
 
   render () {
+    //console.log("reorder?", this.state.reorderMode, '::', "delete?", this.state.deleteMode)
     const elements = this.props.palateEls.map((e, i) =>  <SVGElement key={`key${e.id}`} hoverData={this.hoverData} reorder={this.reorder} deleteEl={this.deleteEl} reorderMode={this.state.reorderMode} deleteMode={this.state.deleteMode} id={`id${e.id}`} fill={e.fill} size={e.size} position={e.position}/>)
     //const colors = this.props.colorsContainer.map((e, i) => <ColorItemComp height={'20px'} color={e}/>)
     return (
@@ -162,7 +167,7 @@ saveSVG = () => {
           <button className={"nice-button palate-button"} style={ this.state.reorderMode ? {backgroundColor: 'rgba(0, 255, 0, .5)'} : null} onClick={this.reorderMode}>Reorder Mode</button>
           <button className={"nice-button palate-button"} style={ this.state.deleteMode ? {backgroundColor: 'rgba(0, 255, 0, .5)'} : null} onClick={this.deleteMode}>Delete Mode</button>
           <button className={"nice-button palate-button"} onClick={this.saveSVG}>Save</button>
-        <p>{this.state.currentHoverData}</p>
+        <div style={{gridColumn: '1/4', textAlign: 'center', height: '30px'}}><p>{this.state.currentHoverData}</p></div>
       </div>
     )
   }

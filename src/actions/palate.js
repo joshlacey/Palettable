@@ -21,7 +21,6 @@ function savingPalate() {
 
 export function savePalate(userId, copy, title, note, colors) {
   return function (dispatch) {
-    console.log("thecolors", colors.join(','))
     dispatch(savingPalate())
     const body = {user_id: userId,
             palate_data: { copy: copy, title: title, note: note, colors: colors.join(',') }

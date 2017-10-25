@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router'
 import { Route, Switch } from 'react-router-dom';
 import Authorize from './Authorize';
 import LoginForm from './LoginForm';
@@ -7,6 +8,7 @@ import PalatesContainer from './main/PalatesContainer';
 import SVGEdit from './palate/SVGEdit';
 import Logout from './Logout'
 import MyPalates from './main/MyPalates'
+import { connect } from 'react-redux';
 
 
 class Body extends React.Component {
@@ -29,4 +31,10 @@ class Body extends React.Component {
   }
 }
 
-export default Body
+function mapStateToProps(state) {
+  return {
+    user: state.user.user
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(Body))

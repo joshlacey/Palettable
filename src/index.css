@@ -15,9 +15,16 @@ a:link {
   text-decoration: none;
 }
 
-input:focus {
+textarea:focus, input:focus {
   outline: none;
+  border: 1px solid black;
 }
+
+textarea {
+  resize: none;
+}
+
+textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
 /***Navigation***/
 
 .navbar {
@@ -75,7 +82,7 @@ input:focus {
   padding: 10px ;
   font-family: 'Roboto', sans-serif;
   font-size: 1em;
-  transition: .75s ease-in-out;
+  transition: .5s ease-in-out;
 }
 
 .nice-button:hover {
@@ -95,7 +102,7 @@ input:focus {
   font-family: 'Roboto', sans-serif;
   font-size: 1em;
   margin: 5px;
-  transition: .75s ease-in-out;
+  transition: .5s ease-in-out;
 }
 
 .mean-button:hover {
@@ -180,13 +187,90 @@ input:focus {
 .color-item-wrapper>p {
   text-align: left;
 }
-/***ChromPickerOverride***/
 
-div>div.chrome-picker {
-  box-shadow: none;
-  border: 1px solid #ccc;
-  width: 100%;
+/***SvgEdit***/
+.svg-edit {
+  padding: 2em;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 2em;
+  grid-auto-rows: minmax(200px, auto);
 }
+
+/***NoteForm***/
+
+.note-form {
+  width: 80%;
+  margin: 0 auto 0;
+}
+
+.note-form>input {
+  width: 100%;
+  font-size: 1em;
+  margin-top: 15px;
+  padding: 5px;
+}
+
+.note-form>textarea {
+  width: 100%;
+  margin: 15px auto 0;
+  padding: 5px;
+}
+
+/***ImageForm***/
+
+.image-form {
+  overflow: auto;
+}
+
+.image-form>form {
+  overflow: auto;
+  margin-bottom: 15px;
+}
+
+.image-form>form>input {
+  width: 65%;
+  padding: 10px;
+  float: left;
+}
+
+.image-form>form>button {
+  width: 25%;
+  min-width: 85px;
+  float: right;
+  padding: 7px;
+  white-space: nowrap;
+}
+
+/***LoginForm***/
+
+.login-form {
+  margin: 10% auto;
+  border: 1px solid #ccc;
+  text-align: center;
+  width: 200px;
+  padding: 10px 30px 50px;
+  transition: .5s ease-in-out;
+}
+
+.login-form:hover {
+  border: 1px solid black;
+}
+
+.login-form>h1 {
+  transition: .5s ease-in-out;
+}
+
+.login-form>h1:hover {
+  color: black;
+}
+
+
+.login-form>input {
+  margin-bottom: 20px;
+  padding: 5px;
+}
+
 /***Reset***/
 
 /*html, body, div, span, applet, object, iframe,

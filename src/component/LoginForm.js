@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/userServices';
+import { withRouter } from 'react-router'
 
 
 class LoginForm extends React.Component{
@@ -37,13 +38,13 @@ class LoginForm extends React.Component{
 
     }
 
-
   render() {
     return(
-      <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="username" onChange={this.handleUsernameChange} value={this.state.username}/>
-          <input type="password" placeholder="password" onChange={this.handlePasswordChange} value={this.state.password}/>
-          <input type="submit" value="Submit"/>
+      <form className={'login-form'} onSubmit={this.handleSubmit}>
+          <h1>login</h1>
+          <input type="text" placeholder="username" onChange={this.handleUsernameChange} value={this.state.username}/><br/>
+          <input type="password" placeholder="password" onChange={this.handlePasswordChange} value={this.state.password}/><br/>
+          <button className={'nice-button'} type="submit">Submit</button>
         </form>
     )
   }
@@ -57,4 +58,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(LoginForm)
+export default withRouter(connect(null, mapDispatchToProps)(LoginForm))
