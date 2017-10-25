@@ -1,52 +1,220 @@
-@import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great|Nosifer|Poiret+One|Waiting+for+the+Sunrise');
+@import url('https://fonts.googleapis.com/css?family=Droid+Sans|Roboto:300:500');
 
-/*font-family: 'Nosifer', cursive;
-font-family: 'Fredericka the Great', cursive;
-font-family: 'Waiting for the Sunrise', cursive;
-font-family: 'Poiret One', cursive;*/
+/*font-family: 'Droid Sans', sans-serif;
+font-family: 'Roboto', sans-serif;*/
 
 body {
   margin: 0;
-  padding: 0;
-  font-family: 'Poiret One', cursive;
-  color: white;
-  background-color: #2D6A86;
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+  color: #ccc;
+
+}
+
+a:link {
+  text-decoration: none;
 }
 
 /***Navigation***/
+
 .navbar {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  font-family: 'Waiting for the Sunrise', cursive;
-  font-size: 2em;
+  font-family: 'Droid Sans', sans-serif;
+  grid-gap: 1em;
+  font-weight: bold;
+  font-size: 1.1em;
 }
 
-.navbar a {
-  text-decoration: none;
-  color: white;
+.nav-wrapper {
+  display:grid;
+  grid-template-columns: 1fr;
+  text-align: center;
+  border: 1px solid #ccc;
+  transition: .75s ease-in-out;
 }
 
-.navbar a:hover {
-  color: #DF8330;
+.nav-wrapper:hover {
+  border: 1px solid black;
+}
+
+.overlap {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.text {
+  color: rgba(255, 0, 0, .33);
+  transition: .75s ease-in-out;
+}
+
+.text2 {
+  color: rgba(0, 255, 0, .33);
+}
+
+.text3 {
+  color: rgba(0, 0, 255, .33);
+  transition: .75s ease-in-out;
 }
 
 /***Button***/
 
 .nice-button {
-  background-color: #192A4D;
-  color: #fff;
-  border: none;
-  border-radius: 15px;
+  background-color: #fff;
+  color: #ccc;
+  border: 1px solid #ccc;
   padding: 10px ;
-  font-family: 'Poiret One', cursive;
+  font-family: 'Roboto', sans-serif;
   font-size: 1em;
   margin: 5px;
+  transition: .75s ease-in-out;
 }
 
 .nice-button:hover {
-  background-color: #DF8330;
+  color: #fff;
+  background-color: rgba(0, 255, 0, .5);
 }
 
 .nice-button:focus {
   outline:none;
 }
+
+.mean-button {
+  background-color: #fff;
+  color: #ccc;
+  border: 1px solid #ccc;
+  padding: 10px ;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  margin: 5px;
+  transition: .75s ease-in-out;
+}
+
+.mean-button:hover {
+  color: #fff;
+  background-color: rgba(255, 0, 0, .75);
+}
+
+.mean-button:focus {
+  outline:none;
+}
+
+/***Main***/
+
+.main-palates-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1em;
+    padding: 20px;
+    text-align: center;
+}
+
+.main-palate-item-wrapper {
+
+}
+
+.main-palate-items {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid #ccc;
+}
+
+.main-palate-items>div {
+  width: 100%;
+  height: 400px;
+  grid-column: 1/2;
+  grid-row: 1/2;
+  background-color: rgba(255,255,255,.5);
+  z-index: 2;
+  transition: .5s ease-in-out;
+}
+
+.main-palate-items>div:hover {
+  background-color: rgba(255,255,255, 0);
+  z-index: 0;
+}
+
+.main-palate-items>svg {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+/***Repalate***/
+
+.repalate-container {
+  display: grid;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.repalate-container>svg {
+  border: 1px solid #ccc;
+}
+
+.color-item-wrapper {
+  border: 1px solid white;
+  margin-top: 20px;
+}
+
+.color-item-wrapper:hover {
+  border: 1px solid #ccc;
+  color: black;
+}
+
+.color-item-wrapper>div {
+  float: left;
+  width: 20%;
+  height: 85px;
+  margin-right: 10px;
+}
+
+.color-item-wrapper>p {
+  text-align: left;
+}
+
+/***Reset***/
+
+/*html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+/*article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}*/

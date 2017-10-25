@@ -25,7 +25,7 @@ componentDidMount = () => {
     const ps = this.props.palates
     const palates = ps.length ? ps.map((p,i) => <Link key={i} to={`/palates/${p.id}`}><Palate key={i} svg={p.data.copy.join('')}/></Link>) : null
     return (
-      <div style={styling}>
+      <div className={'main-palates-wrapper'}>
       { this.props.loading ? this.loading() : palates }
       </div>
     )

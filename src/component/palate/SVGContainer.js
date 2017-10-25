@@ -74,19 +74,27 @@ takeScreenShot = () => {
 }
 
 reorderMode = () => {
-  this.setState({
-    reorderMode: !this.state.reorderMode,
-    deleteMode: false,
-    save: true
-  })
+  if(this.palate.children.length) {
+    this.setState({
+      reorderMode: !this.state.reorderMode,
+      deleteMode: false,
+      save: true
+    })
+  } else {
+    null
+  }
 }
 
 deleteMode = () => {
-  this.setState({
-    reorderMode: false,
-    deleteMode: !this.state.deleteMode,
-    save: true
-  })
+  if(this.palate.children.length) {
+    this.setState({
+      reorderMode: false,
+      deleteMode: !this.state.deleteMode,
+      save: true
+    })
+  } else {
+    null
+  }
 }
 
 reorder = (circle, parentId) => {
@@ -130,12 +138,16 @@ hoverData = (parentId) => {
 }
 
 saveSVG = () => {
-  const palateCopy = this.palate.cloneNode(true)
-  const children = this.toArray(palateCopy.childNodes)
-  const elements = children.filter(e => (e !== "<desc>Created with Snap</desc>") && (e !== "<defs></defs>") )
-  const id = localStorage.getItem('userId') ? localStorage.getItem('userId') : null
-  id ? this.props.savePalate(id, elements, this.props.title, this.props.note, this.props.colorsContainer) : alert("you must be logged in to save.")
-  id ? alert("Palate Saved") : null
+  if (this.palate.children.length) {
+    const palateCopy = this.palate.cloneNode(true)
+    const children = this.toArray(palateCopy.childNodes)
+    const elements = children.filter(e => (e !== "<desc>Created with Snap</desc>") && (e !== "<defs></defs>") )
+    const id = localStorage.getItem('userId') ? localStorage.getItem('userId') : null
+    id ? this.props.savePalate(id, elements, this.props.title, this.props.note, this.props.colorsContainer) : alert("you must be logged in to save.")
+    id ? alert("Palate Saved") : null
+  } else {
+    null
+  }
 }
 
 
@@ -154,8 +166,8 @@ saveSVG = () => {
         </div>
 
 
-        <button className={"nice-button"} style={this.state.reorderMode?{backgroundColor: '#DF8330'}:null} onClick={this.reorderMode}>Reorder Mode</button>
-        <button className={"nice-button"} style={this.state.deleteMode?{backgroundColor: '#DF8330'}:null} onClick={this.deleteMode}>Delete Mode</button>
+        <button className={"nice-button"} style={this.state.reorderMode?{backgroundColor: 'rgba(0, 255, 0, .5)'}:null} onClick={this.reorderMode}>Reorder Mode</button>
+        <button className={"nice-button"} style={this.state.deleteMode?{backgroundColor: 'rgba(0, 255, 0, .5)'}:null} onClick={this.deleteMode}>Delete Mode</button>
         <button className={"nice-button"} onClick={this.saveSVG}>Save</button>
         <p>{this.state.currentHoverData}</p>
       </div>

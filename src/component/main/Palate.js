@@ -17,11 +17,12 @@ class Palate extends React.Component {
     const svg = Parser(temp)
 
     return(
-      <div>
-        <svg width={'400px'} height={'400px'} id={'rePalate'} >
+      <div className={"main-palate-items"}>
+        <div>
+        </div>
+        <svg width={'100%'} height={'auto'} id={'rePalate'} >
           {svg}
         </svg>
-
       </div>
     )
   }

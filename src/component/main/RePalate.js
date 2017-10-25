@@ -2,9 +2,11 @@ import React from 'react';
 import Parser from 'html-react-parser'
 import Snap from 'snapsvg-cjs';
 import { connect } from 'react-redux'
+import ColorItemComp from './ColorItemComp.js'
 import { deletePalate } from '../../actions/userServices'
 import { start, move, stop } from '../../snap/dragCallbacks.js'
 import { Link, Redirect } from 'react-router-dom'
+
 
 String.prototype.replaceAll = function(search, replacement) {
     var target = this;
@@ -62,10 +64,7 @@ componentDidUpdate = (prevState, prevProps) => {
     }
 }
 
-hexToRgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? `( ${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)} )` : null;
-}
+
 
   handleClick = (event) => {
     const id = event.target.baseURI.split('/palates/')[1]
@@ -75,19 +74,19 @@ hexToRgb(hex) {
 
   render(){
     const user = localStorage.getItem('username')
-    console.log(this.state.palate)
-    const palateColors = this.state.colors.length ? this.state.colors.map(color => <div style={{backgroundColor: color}}>Hex Value: {color.toUpperCase()}, RGB Value: {this.hexToRgb(color)}</div>) : null
+    const palateColors = this.state.colors.length ? this.state.colors.map(color =>  <ColorItemComp color={color}/> ) : null
     return(
-      <div>
-        <svg style={{border: "1px solid grey"}} width={'400px'} height={'400px'} id={'rePalate'} >
+      <div className={'repalate-container'}>
+        <svg width={'400px'} height={'400px'} id={'rePalate'} >
           {this.state.palate}
         </svg>
+        <p>{this.state.creator !== localStorage.getItem('username') ? `created by: ${this.state.creator}` : 'created by you'}</p>
         <h1>{this.state.title}</h1>
         <p>{this.state.note}</p>
-        <p>{this.state.creator !== localStorage.getItem('username') ? `created by: ${this.state.creator}` : 'created by you'}</p>
-
-        {localStorage.getItem('jwtToken') ? <Link to={`/${user}/palates`}><button props={this.props} onClick={this.handleClick}>Delete Your Palate</button></Link> : null }
         {palateColors}
+        <br/><br/>
+        {localStorage.getItem('jwtToken') ? <Link to={`/${user}/palates`}><button className={'mean-button'} props={this.props} onClick={this.handleClick}>Delete Your Palate</button></Link> : null }
+
       </div>
     )
   }
