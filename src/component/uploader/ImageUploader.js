@@ -17,7 +17,6 @@ class ImageUploader extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    //this.props.uploadImage(this.state.url)
     if(this.state.url !== "") {
       this.props.searchColors(this.state.url)
     } else {
@@ -31,8 +30,8 @@ class ImageUploader extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input onChange={this.handleChange} placeholder={'Image Url'}/>
-          <button type='sumit'>Submit</button>
+          <input style={{width: '65%', padding: '10px', float: 'left', margin: '5px'}} onChange={this.handleChange} placeholder={'Image Url'}/>
+          <button style={{width: '25%', float: 'right'}} className={'nice-button'} type='sumit'>Submit</button>
         </form>
       </div>
     )

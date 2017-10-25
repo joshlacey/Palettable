@@ -9,7 +9,7 @@ const ColorItemComp = (props) => {
   }
 
   return (
-    <div className={'color-item-wrapper'}>
+    <div height={ props.height? props.height : null } className={'color-item-wrapper'}>
       <div style={{backgroundColor: props.color}}> </div>
       <p>Hex Value: {props.color.toUpperCase()}</p>
       <p>RGB Value: {hexToRgb(props.color)}</p>

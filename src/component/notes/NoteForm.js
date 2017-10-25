@@ -56,10 +56,12 @@ class NoteForm extends React.Component{
   render() {
 
     return(
-      <form id="titleof" style={{width: '100%'}}>
-          <input style={{width: '100%', marginTop: '15px'}} type="text" placeholder="Title" onChange={this.props.handleTitleChange} value={this.props.title}/><br/>
-          <textarea style={{width: '100%', marginTop: '10px'}} placeholder="Add note..." onChange={this.props.handleNoteChange} name="note" value={this.props.note} rows="10" cols="30"/>
-      </form>
+      <div>
+        <form id="titleof" style={{width: '80%'}}>
+            <input style={{width: '100%', marginTop: '15px'}} type="text" placeholder="Title" onChange={this.props.handleTitleChange} value={this.props.title}/><br/>
+            <textarea style={{width: '100%', marginTop: '10px'}} placeholder="Add note..." onChange={this.props.handleNoteChange} name="note" value={this.props.note} rows="10" cols="30"/>
+        </form>
+      </div>
     )
   }
 }

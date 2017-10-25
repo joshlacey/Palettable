@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import SVGElement from './SVGElement'
 import * as actions from '../../actions/palate'
 import '../../index.css'
+import ColorItemComp from '../main/ColorItemComp'
 
 class SVGContainer extends React.Component {
 
@@ -48,14 +49,12 @@ toArray (obj) {
 }
 
 takeScreenShot = () => {
-  //console.log("canuserefs", this.palate == document.getElementById('mainContainer'))
   const palateCopy = this.palate.cloneNode(true)
   const children = this.toArray(palateCopy.childNodes)
   const html = children.join('')
   const content = Parser(html)
   const filtered = content.filter(e => !e.type.match(/defs|desc/g) )
   let something
-  //console.log(filtered)
   if (!filtered.length) {
     const before = filtered.props.children
     const sub = before.length ? before[before.length-1] : before
@@ -64,7 +63,6 @@ takeScreenShot = () => {
   } else {
     something = filtered.map(element => {
     const before = element.props.children
-    //console.log(element)
     const sub = before.length ? before[before.length-1] : before
     const subsub = sub.props.children.length ? sub.props.children[0].props : sub.props.children.props
     return ({id: element.props.id.replace('id', ''), mode: true, size: sub.props.transform , fill: subsub.fill, position: subsub.transform})
@@ -153,22 +151,17 @@ saveSVG = () => {
 
   render () {
     const elements = this.props.palateEls.map((e, i) =>  <SVGElement key={`key${e.id}`} hoverData={this.hoverData} reorder={this.reorder} deleteEl={this.deleteEl} reorderMode={this.state.reorderMode} deleteMode={this.state.deleteMode} id={`id${e.id}`} fill={e.fill} size={e.size} position={e.position}/>)
-    const colors = this.props.colorsContainer.map((e, i) => <div key={`side${e}`} style={{display: 'grid', backgroundColor: e, gridColumn: "1/2", width: '10px', height: '10px'}}/>)
+    //const colors = this.props.colorsContainer.map((e, i) => <ColorItemComp height={'20px'} color={e}/>)
     return (
-      <div id='#palateContainer'>
-        <div style={{display: 'grid', gridTemplateColumns: "1fr 9fr"}}>
-          <div>
-            {colors}
-          </div>
-          <svg ref={(palate) => this.palate = palate} style={{display: 'grid', gridColumn: '2/3', border: "1px solid grey"}} width={'400px'} height={'400px'} id={'mainContainer'} viewBox={"0 0 400 400"}>
+      <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', justifyContent: 'center', gridGap: '1em'}}id='#palateContainer'>
+        <div style={{gridColumn: '1/4', marginLeft: 'auto', marginRight: 'auto'}}>
+          <svg ref={(palate) => this.palate = palate} style={{display: 'grid', gridColumn: '1/2', border: "1px solid #ccc"}} width={'400px'} height={'400px'} id={'mainContainer'} viewBox={"0 0 400 400"}>
             {elements}
           </svg>
         </div>
-
-
-        <button className={"nice-button"} style={this.state.reorderMode?{backgroundColor: 'rgba(0, 255, 0, .5)'}:null} onClick={this.reorderMode}>Reorder Mode</button>
-        <button className={"nice-button"} style={this.state.deleteMode?{backgroundColor: 'rgba(0, 255, 0, .5)'}:null} onClick={this.deleteMode}>Delete Mode</button>
-        <button className={"nice-button"} onClick={this.saveSVG}>Save</button>
+          <button className={"nice-button palate-button"} style={ this.state.reorderMode ? {backgroundColor: 'rgba(0, 255, 0, .5)'} : null} onClick={this.reorderMode}>Reorder Mode</button>
+          <button className={"nice-button palate-button"} style={ this.state.deleteMode ? {backgroundColor: 'rgba(0, 255, 0, .5)'} : null} onClick={this.deleteMode}>Delete Mode</button>
+          <button className={"nice-button palate-button"} onClick={this.saveSVG}>Save</button>
         <p>{this.state.currentHoverData}</p>
       </div>
     )
