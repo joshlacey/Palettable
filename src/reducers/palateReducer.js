@@ -3,6 +3,7 @@ export default function palateReducer(state={ palate: "", title: "", note: "", s
     case "PALATE_SAVED":
         return {...state, palate: action.payload, saving: false, title: "", note: "" }
     case "SAVING_PALATE":
+        console.log("savingstate", state)
         return {...state, saving: true}
     case "UPDATE_PALATE":
         return {...state, current: action.payload }
@@ -18,8 +19,8 @@ export default function palateReducer(state={ palate: "", title: "", note: "", s
         return {...state, title: action.payload }
     case "NOTE":
         return {...state, note: action.payload}
-    // case "UPDATE_TITLE_NOTE":
-    //     return {...state, note: "", title: ""}
+    case "UPDATE_TITLE_NOTE":
+        return {...state, note: "", title: ""}
     default:
       return state
   }

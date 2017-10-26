@@ -3,9 +3,11 @@ import Snap from 'snapsvg-cjs';
 import Parser from 'html-react-parser'
 import { connect } from 'react-redux'
 import SVGElement from './SVGElement'
-import * as actions from '../../actions/palate'
+//import * as actions from '../../actions/palate'
 import '../../index.css'
 import ColorItemComp from '../main/ColorItemComp'
+import { savePalate, updatePalate, addToPalate, removeCurrentColor, screenShot, resetPalate, removeOneColor } from '../../actions/palate'
+import { removeColors } from '../../actions/uploader'
 
 class SVGContainer extends React.Component {
 
@@ -145,6 +147,7 @@ saveSVG = () => {
     const children = this.toArray(palateCopy.childNodes)
     const elements = children.filter(e => (e !== "<desc>Created with Snap</desc>") && (e !== "<defs></defs>") )
     const id = localStorage.getItem('userId') ? localStorage.getItem('userId') : null
+    console.log(this.props.colorsContainer)
     id ? this.props.savePalate(id, elements, this.props.title, this.props.note, this.props.colorsContainer) : alert("you must be logged in to save.")
     id ? alert("Palate Saved") : null
   } else {
@@ -186,27 +189,35 @@ function mapStateToProps(state) {
   }
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     savePalate: (userId, svg, copyString) => {
-//       dispatch(savePalate(userId, svg, copyString))
-//     },
-//     updatePalate: (currentPalate) => {
-//       dispatch(updatePalate(currentPalate))
-//     },
-//     addToPalate: (svg) => {
-//       dispatch(addToPalate(svg))
-//     },
-//     removeCurrentColor: () => {
-//       dispatch(removeCurrentColor())
-//     },
-//     screenShot: () => {
-//       dispatch(screenShot())
-//     },
-//     resetPalate: (array) => {
-//       dispatch( resetPalate(array))
-//     }
-//   }
-// }
+function mapDispatchToProps(dispatch) {
+  return {
+    savePalate: (id, elements, title, note, colorsContainer) => {
+      dispatch(savePalate(id, elements, title, note, colorsContainer))
+    },
+    updatePalate: (currentPalate) => {
+      dispatch(updatePalate(currentPalate))
+    },
+    addToPalate: (svg) => {
+      dispatch(addToPalate(svg))
+    },
+    removeCurrentColor: () => {
+      dispatch(removeCurrentColor())
+    },
+    screenShot: () => {
+      dispatch(screenShot())
+    },
+    resetPalate: (array) => {
+      dispatch( resetPalate(array))
+    },
+    removeOneColor: (color) => {
+      dispatch( removeOneColor(color) )
+    },
+    removeColors: () => {
+      dispatch ( removeColors() )
+    }
+  }
+}
 
-export default connect(mapStateToProps, actions )(SVGContainer)
+
+
+export default connect( mapStateToProps, mapDispatchToProps )(SVGContainer)

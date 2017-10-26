@@ -32,15 +32,15 @@ class Nav extends React.Component {
       <div className={'navbar'} >
         <Link to='/palates'>
           <div className={'nav-wrapper'}>
-            <p className={'overlap text'}>Palatable</p>
-            <p className={'overlap text2'}>Palatable</p>
-            <p className={'overlap text3'}>Palatable</p>
+            <p className={'overlap text'}>Palettable</p>
+            <p className={'overlap text2'}>Palettable</p>
+            <p className={'overlap text3'}>Palettable</p>
           </div>
         </Link>
         <Link to='/edit'>
           <div className={'nav-item nav-item-red'}>Create New</div>
         </Link>
-        {hasToken ? <Link to={`/${username}/palates`}><div className={'nav-item nav-item-green'}>Your Palates</div></Link> : null }
+        {hasToken ? <Link to={`/${username}/palates`}><div className={'nav-item nav-item-green'}>Your Palettes</div></Link> : null }
         {hasToken ? <Link to='/logout'><div className={'nav-item nav-item-blue'}>Logout</div></Link> : <Link to='/login'><div className={'nav-item nav-item-green'}>Login</div></Link> }
         {hasToken ? null : <Link to='/signup'><div className={'nav-item nav-item-blue'}>Signup</div></Link> }
 

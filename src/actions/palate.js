@@ -20,6 +20,7 @@ function savingPalate() {
 }
 
 export function savePalate(userId, copy, title, note, colors) {
+
   return function (dispatch) {
     dispatch(savingPalate())
     const body = {user_id: userId,
@@ -105,27 +106,28 @@ export function handleNoteChange (event) {
   }
 }
 
+function palateUpdated() {
+  return {
+    type: "UPDATE_TITLE_NOTE"
+  }
+}
 
-// export function updatePalate (title, note) {
-//   return function(dispatch) {
-//     const body = {user_id: userId,
-//             palate_data: { copy: copy, title: title, note: note, colors: colors.join(',') }
-//           }
-//     const params = {
-//       method: 'POST',
-//       headers: headers(),
-//       body: JSON.stringify(body)
-//     }
-//
-//     fetch(process.env.REACT_APP_API_ENDPOINT + 'palates/' + palateId + '/palates/edit, params)
-//       .then((res) => res.json())
-//       .then((json) => {
-//         if (json){
-//           dispatch(savedPalate(json))
-//         } else {
-//           alert("didn't work")
-//         }
-//       })
-//   }
-//   }
-// }
+export function editPalate (title, note, id) {
+  return function(dispatch) {
+    const body = {title: title, note: note }
+    const params = {
+      method: 'PATCH',
+      headers: headers(),
+      body: JSON.stringify(body)
+    }
+    fetch(process.env.REACT_APP_API_ENDPOINT + 'palates/' + id + '/edit', params)
+      .then((res) => res.json())
+      .then((json) => {
+        if (json){
+          dispatch(palateUpdated(json))
+        } else {
+          alert("didn't work")
+        }
+      })
+  }
+}

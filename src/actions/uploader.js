@@ -84,6 +84,7 @@ export function addOneColor(string) {
 }
 
 export function removeColors() {
+  console.log("removing Colors")
   return {
     type: "REMOVE_COLORS"
   }

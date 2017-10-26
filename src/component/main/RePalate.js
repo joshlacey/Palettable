@@ -4,8 +4,10 @@ import Snap from 'snapsvg-cjs';
 import { connect } from 'react-redux'
 import ColorItemComp from './ColorItemComp.js'
 import { deletePalate } from '../../actions/userServices'
+import { editPalate } from '../../actions/palate'
 import { start, move, stop } from '../../snap/dragCallbacks.js'
 import { Link, Redirect } from 'react-router-dom'
+import NoteForm from '../notes/NoteForm'
 
 
 String.prototype.replaceAll = function(search, replacement) {
@@ -72,9 +74,18 @@ componentDidUpdate = (prevState, prevProps) => {
     alert("Palate Deleted")
   }
 
+  updateInfo = (event) => {
+    const id = event.target.baseURI.split('/palates/')[1]
+    const title = this.props.title
+    const note = this.props.note
+    this.setState({title: title, note: note})
+    this.props.editPalate(title, note, id)
+  }
+
   render(){
     const user = localStorage.getItem('username')
     const palateColors = this.state.colors.length ? this.state.colors.map(color =>  <ColorItemComp color={color}/> ) : null
+    console.log(this.state.creator === user)
     return(
       <div className={'repalate-container'}>
         <svg width={'400px'} height={'400px'} id={'rePalate'} >
@@ -85,10 +96,19 @@ componentDidUpdate = (prevState, prevProps) => {
         <p>{this.state.note}</p>
         {palateColors}
         <br/><br/>
-        {localStorage.getItem('jwtToken') ? <Link to={`/${user}/palates`}><button className={'mean-button'} props={this.props} onClick={this.handleClick}>Delete Your Palate</button></Link> : null }
+        { (!this.state.title && (this.state.creator === user)) ? <div><NoteForm /><button className={'nice-button'} onClick={this.updateInfo}>Update</button></div> : null}
+        <br/><br/>
+        {localStorage.getItem('jwtToken') ? <Link to={`/${user}/palates`}><button className={'mean-button'} props={this.props} onClick={this.handleClick} >Delete Your Palate</button></Link> : null }
 
       </div>
     )
+  }
+}
+
+function mapStateToProps (state) {
+  return {
+    note: state.palate.note,
+    title: state.palate.title
   }
 }
 
@@ -96,8 +116,11 @@ function mapDispatchToProps (dispatch) {
   return {
       deletePalate: (id) => {
         dispatch(deletePalate(id))
+      },
+      editPalate: (title, note, id) => {
+        dispatch(editPalate(title, note, id))
       }
     }
 }
-//{ this.state.loading ? this.loading() : svg }
-export default connect(null, mapDispatchToProps)(RePalate)
+
+export default connect(mapStateToProps, mapDispatchToProps)(RePalate)

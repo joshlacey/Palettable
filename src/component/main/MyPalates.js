@@ -3,9 +3,9 @@ import Palate from './Palate'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getMyPalates } from '../../actions/userServices'
-// import { updatePalate } from '../../actions/palate'
+
 import '../../index.css'
-// import NoteForm from '../notes/NoteForm'
+
 
 class MyPalates extends React.Component {
 
@@ -39,9 +39,7 @@ function mapStateToProps (state) {
   return {
     updateAfterDelete: state.user.updateAfterDelete,
     palates: state.user.palates,
-    loading: state.user.loading,
-    // note: state.palate.note,
-    // title: state.palate.title
+    loading: state.user.loading
   }
 }
 
@@ -49,10 +47,7 @@ function mapDispatchToProps (dispatch) {
   return {
     getMyPalates: () => {
       dispatch(getMyPalates())
-    },
-    // updatePalate: (title, note) => {
-    //   dispatch(updatePalate(title, note))
-    // }
+    }
   }
 }
 
