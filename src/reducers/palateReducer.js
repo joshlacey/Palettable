@@ -21,6 +21,8 @@ export default function palateReducer(state={ palate: "", title: "", note: "", s
         return {...state, note: action.payload}
     case "UPDATE_TITLE_NOTE":
         return {...state, note: "", title: ""}
+    case "REMOVE_PALATE_ELS":
+        return {...state, otherPalate: []}
     default:
       return state
   }

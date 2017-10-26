@@ -6,7 +6,7 @@ import SVGElement from './SVGElement'
 //import * as actions from '../../actions/palate'
 import '../../index.css'
 import ColorItemComp from '../main/ColorItemComp'
-import { savePalate, updatePalate, addToPalate, removeCurrentColor, screenShot, resetPalate, removeOneColor } from '../../actions/palate'
+import { savePalate, updatePalate, addToPalate, removeCurrentColor, screenShot, resetPalate, removeOneColor, removePalateEls } from '../../actions/palate'
 import { removeColors } from '../../actions/uploader'
 
 class SVGContainer extends React.Component {
@@ -150,6 +150,7 @@ saveSVG = () => {
     console.log(this.props.colorsContainer)
     id ? this.props.savePalate(id, elements, this.props.title, this.props.note, this.props.colorsContainer) : alert("you must be logged in to save.")
     id ? alert("Palate Saved") : null
+    this.props.removePalateEls()
   } else {
     null
   }
@@ -214,6 +215,9 @@ function mapDispatchToProps(dispatch) {
     },
     removeColors: () => {
       dispatch ( removeColors() )
+    },
+    removePalateEls: () => {
+      dispatch ( removePalateEls() )
     }
   }
 }

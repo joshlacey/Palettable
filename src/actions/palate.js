@@ -131,3 +131,9 @@ export function editPalate (title, note, id) {
       })
   }
 }
+
+export function removePalateEls () {
+  return {
+    type: "REMOVE_PALATE_ELS"
+  }
+}
