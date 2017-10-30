@@ -30,6 +30,7 @@ class Nav extends React.Component {
     const hasToken = !!localStorage.getItem('jwtToken')
     return(
       <div className={'navbar'} >
+        <p>hello</p>
         <Link to='/palates'>
           <div className={'nav-wrapper'}>
             <p className={'overlap text'}>Palettable</p>
