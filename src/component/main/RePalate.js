@@ -98,7 +98,7 @@ componentDidUpdate = (prevState, prevProps) => {
         <br/><br/>
         { (!this.state.title && (this.state.creator === user)) ? <div><NoteForm /><button className={'nice-button'} onClick={this.updateInfo}>Update</button></div> : null}
         <br/><br/>
-        {localStorage.getItem('jwtToken') ? <Link to={`/${user}/palates`}><button className={'mean-button'} props={this.props} onClick={this.handleClick} >Delete Your Palate</button></Link> : null }
+        {(this.state.creator === user) ? <Link to={`/${user}/palates`}><button className={'mean-button'} props={this.props} onClick={this.handleClick} >Delete Your Palate</button></Link> : null }
 
       </div>
     )

@@ -17,7 +17,7 @@ export default function uploaderReducer(state={ imageUrl: "", fetchedColors: [],
       const newColorsContainer = c ? [ ...state.colorContainer, c ] : state.colorContainer
       return {...state, color: c, colorContainer: newColorsContainer }
     case "REMOVE_COLORS":
-      return { ...state, colorContainer: []}
+      return { ...state, colorContainer: [], fetchedColors: []}
     case "REMOVE_NEXTCOLORS":
       return { ...state, nextColors: [] }
     case "REMOVE_CURRENT_COLOR":
