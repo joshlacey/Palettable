@@ -60,7 +60,7 @@ componentDidUpdate = (prevState, prevProps) => {
     if (this.state.palate.length) {
       this.state.palate.forEach( i => {
         const element = Snap(`#${i.props.id}`)
-        const circle = element.children().find(c => !c.type.match(/desc|defs/g))
+        const circle = element.children().find(c => !c.type.match(/desc|defs/g) && c.children().length )
         circle.drag( move, start, stop )
       })
     }
