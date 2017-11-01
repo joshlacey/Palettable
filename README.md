@@ -3,7 +3,7 @@
 
 Live Demo: https://palettable.herokuapp.com/
 
-![Alt text](https://media.giphy.com/media/XBhzUNf7ta00w/giphy.gif)
+![Colored Pencils In Order So Satisfying](https://media.giphy.com/media/XBhzUNf7ta00w/giphy.gif)
 
 **Main Features**
 
