@@ -33,38 +33,33 @@ componentWillUpdate(nextProps, nextState) {
   }
 }
 
-toArray (obj) {
-  var array = [];
-  for (var i = obj.length >>> 0; i--;) {
-    array[i] = obj[i].outerHTML;
-  }
-  return array;
-}
 
 takeScreenShot = () => {
-  debugger
   //Check to see weather or not the palette is empty to avoid changing running this function on empty container
   if([...this.palate.childNodes].filter(e => e.nodeName === "svg").length) {
+    //copy the ref from the DOM
     const palateCopy = this.palate.cloneNode(true)
-    debugger
-    const children = this.toArray(palateCopy.childNodes)
-    const html = children.join('')
+    //use spread operator to turn DOM array into Array.prototype, return outerHTML of each and then join to one string
+    const html = [...palateCopy.childNodes].map(e => e.outerHTML).join('')
+    //Parse the content to turn it into array of Objects
     const content = Parser(html)
+    //Take out elements of type defs or desc, these are extras added by Snap.svg
     const filtered = content.filter(e => !e.type.match(/defs|desc/g) )
     let something
-    if (!filtered.length) {
-      const before = filtered.props.children
-      const sub = before.length ? before[before.length-1] : before
-      const subsub = sub.props.children.length ? sub.props.children[0].props : sub.props.children.props
-      something = [{id: content.props.id.replace('id', ''), mode: true, size: sub.props.transform , fill: subsub.fill, position: subsub.transform}]
-    } else {
-      something = filtered.map(element => {
-      const before = element.props.children
-      const sub = before.length ? before[before.length-1] : before
-      const subsub = sub.props.children.length ? sub.props.children[0].props : sub.props.children.props
-      return ({id: element.props.id.replace('id', ''), mode: true, size: sub.props.transform , fill: subsub.fill, position: subsub.transform})
-    })
-    }
+      //if there is only one element do this
+      if (!filtered.length) {
+        const before = filtered.props.children
+        const sub = before.length ? before[before.length-1] : before
+        const subsub = sub.props.children.length ? sub.props.children[0].props : sub.props.children.props
+        something = [{id: content.props.id.replace('id', ''), mode: true, size: sub.props.transform , fill: subsub.fill, position: subsub.transform}]
+      } else { //if there is more that one do this
+        something = filtered.map(element => {
+        const before = element.props.children
+        const sub = before.length ? before[before.length-1] : before
+        const subsub = sub.props.children.length ? sub.props.children[0].props : sub.props.children.props
+        return ({id: element.props.id.replace('id', ''), mode: true, size: sub.props.transform , fill: subsub.fill, position: subsub.transform})
+        })
+      }
     this.props.resetPalate(something)
   } else {
     this.props.resetPalate([])
@@ -138,10 +133,9 @@ hoverData = (parentId) => {
 saveSVG = () => {
   if (this.palate.children.length) {
     const palateCopy = this.palate.cloneNode(true)
-    const children = this.toArray(palateCopy.childNodes)
+    const children = [...palateCopy.childNodes].map(e => e.outerHTML)
     const elements = children.filter(e => (e !== "<desc>Created with Snap</desc>") && (e !== "<defs></defs>") )
     const id = localStorage.getItem('userId') ? localStorage.getItem('userId') : null
-    console.log(this.props.colorsContainer)
     id ? this.props.savePalate(id, elements, this.props.title, this.props.note, this.props.colorsContainer) : alert("you must be logged in to save.")
     id ? alert("Palate Saved") : null
     this.props.removePalateEls()
