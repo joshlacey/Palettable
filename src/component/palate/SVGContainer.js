@@ -22,45 +22,38 @@ componentWillUpdate(nextProps, nextState) {
     this.setState({save:false})
   }
   if (nextProps.currentColor) {
-      this.props.addToPalate({id: nextProps.currentColor.split('#')[1], size: "", fill: nextProps.currentColor, position: "" })
-      this.props.removeCurrentColor()
+    this.props.addToPalate({id: nextProps.currentColor.split('#')[1], size: "", fill: nextProps.currentColor, position: "" })
+    this.props.removeCurrentColor()
     }
   if (nextProps.nextColors.length) {
     nextProps.nextColors.forEach( (color, i) => {
-      this.props.addToPalate({id: color.split('#')[1], fill: color, position: "" })
+    this.props.addToPalate({id: color.split('#')[1], fill: color, position: "" })
     })
     this.props.removeNextColors()
   }
 }
 
+organizeDOMObject (obj) {
+  const children = obj.props.children
+  //if children returns an array take the last one that was rendered which should be the actual circle
+  const circle = children.length ? children[children.length-1] : children
+  //pull out the props of the circle and account for if there are multiple children
+  const circleProps = circle.props.children.length ? circle.props.children[0].props : circle.props.children.props
+  return ( {id: obj.props.id.replace('id', ''), size: circle.props.transform , fill: circleProps.fill, position: circleProps.transform} )
+}
 
 takeScreenShot = () => {
   //Check to see weather or not the palette is empty to avoid changing running this function on empty container
   if([...this.palate.childNodes].filter(e => e.nodeName === "svg").length) {
-    //copy the ref from the DOM
-    const palateCopy = this.palate.cloneNode(true)
     //use spread operator to turn DOM array into Array.prototype, return outerHTML of each and then join to one string
-    const html = [...palateCopy.childNodes].map(e => e.outerHTML).join('')
+    const html = [...this.palate.childNodes].map(e => e.outerHTML).join('')
     //Parse the content to turn it into array of Objects
     const content = Parser(html)
     //Take out elements of type defs or desc, these are extras added by Snap.svg
     const filtered = content.filter(e => !e.type.match(/defs|desc/g) )
-    let something
-      //if there is only one element do this
-      if (!filtered.length) {
-        const before = filtered.props.children
-        const sub = before.length ? before[before.length-1] : before
-        const subsub = sub.props.children.length ? sub.props.children[0].props : sub.props.children.props
-        something = [{id: content.props.id.replace('id', ''), mode: true, size: sub.props.transform , fill: subsub.fill, position: subsub.transform}]
-      } else { //if there is more that one do this
-        something = filtered.map(element => {
-        const before = element.props.children
-        const sub = before.length ? before[before.length-1] : before
-        const subsub = sub.props.children.length ? sub.props.children[0].props : sub.props.children.props
-        return ({id: element.props.id.replace('id', ''), mode: true, size: sub.props.transform , fill: subsub.fill, position: subsub.transform})
-        })
-      }
-    this.props.resetPalate(something)
+    let schematics = filtered.map( this.organizeDOMObject )
+    //update schematics of how svg elements should be rendered to the page
+    this.props.resetPalate(schematics)
   } else {
     this.props.resetPalate([])
   }
@@ -91,7 +84,6 @@ deleteMode = () => {
 }
 
 reorder = (circle, parentId) => {
-
   const index = this.props.palateEls.findIndex( e => `id${e.id}` == parentId )
 
     function rearrange(array, index) {
@@ -137,7 +129,6 @@ saveSVG = () => {
     const elements = children.filter(e => (e !== "<desc>Created with Snap</desc>") && (e !== "<defs></defs>") )
     const id = localStorage.getItem('userId') ? localStorage.getItem('userId') : null
     id ? this.props.savePalate(id, elements, this.props.title, this.props.note, this.props.colorsContainer) : alert("you must be logged in to save.")
-    id ? alert("Palate Saved") : null
     this.props.removePalateEls()
     this.props.removeColors()
   } else {
