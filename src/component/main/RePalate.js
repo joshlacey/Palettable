@@ -1,19 +1,14 @@
 import React from 'react';
-import Parser from 'html-react-parser'
+import Parser from 'html-react-parser';
 import Snap from 'snapsvg-cjs';
-import { connect } from 'react-redux'
-import ColorItemComp from './ColorItemComp.js'
-import { deletePalate } from '../../actions/userServices'
-import { editPalate } from '../../actions/palate'
-import { start, move, stop } from '../../snap/dragCallbacks.js'
-import { Link, Redirect } from 'react-router-dom'
-import NoteForm from '../notes/NoteForm'
-
-
-String.prototype.replaceAll = function(search, replacement) {
-    var target = this;
-    return target.replace(new RegExp(search, 'g'), replacement);
-};
+import { connect } from 'react-redux';
+import ColorItemComp from './ColorItemComp.js';
+import { deletePalate } from '../../actions/userServices';
+import { editPalate } from '../../actions/palate';
+import { start, move, stop } from '../../snap/dragCallbacks.js';
+import { Link } from 'react-router-dom';
+import NoteForm from '../notes/NoteForm';
+import { replaceAll } from '../../helpers/replaceAll.js';
 
 class RePalate extends React.Component {
 
@@ -24,25 +19,13 @@ class RePalate extends React.Component {
     colors: []
   }
 
-  loading = () => {
-    return(
-        <svg width="48" height="48" viewBox="0 0 300 300">
-          <path d="M 150,0 a 150,150 0 0,1 106.066,256.066 l -35.355,-35.355 a -100,-100 0 0,0 -70.711,-170.711 z" fill="#ccc">
-            <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 150 150" to="360 150 150" begin="0s" dur=".5s" fill="freeze" repeatCount="indefinite"></animateTransform>
-          </path>
-        </svg>
-    )
-  }
-
   componentDidMount = () => {
     this.setState({loading: true})
-    const s = Snap(`#rePalate`)
     fetch(process.env.REACT_APP_API_ENDPOINT + this.props.location.pathname.slice(1))
       .then(resp =>  resp.json())
       .then(resp => {
-        console.log(resp)
         const html = resp.data.copy.join('')
-        const cleaned = html.replaceAll('style=""', '')
+        const cleaned = replaceAll(html, 'style=""', '')
         const content = Parser(cleaned)
         this.setState({
           loading: false,
@@ -67,7 +50,6 @@ componentDidUpdate = (prevState, prevProps) => {
 }
 
 
-
   handleClick = (event) => {
     const id = event.target.baseURI.split('/palates/')[1]
     this.props.deletePalate(id)
@@ -84,8 +66,7 @@ componentDidUpdate = (prevState, prevProps) => {
 
   render(){
     const user = localStorage.getItem('username')
-    const palateColors = this.state.colors.length ? this.state.colors.map(color =>  <ColorItemComp color={color}/> ) : null
-    console.log(this.state.creator === user)
+    const palateColors = this.state.colors.length ? this.state.colors.map((color,i) =>  <ColorItemComp key={i} color={color}/> ) : null
     return(
       <div className={'repalate-container'}>
         <svg width={'400px'} height={'400px'} id={'rePalate'} >

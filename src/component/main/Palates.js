@@ -1,6 +1,7 @@
 import React from 'react';
-import Palate from './Palate'
-import { Link } from 'react-router-dom'
+import Palate from './Palate';
+import { Link } from 'react-router-dom';
+import { loading } from '../../helpers/loader.js';
 
 
 class Palates extends React.Component {
@@ -8,16 +9,6 @@ class Palates extends React.Component {
 state={
   loading:false,
   palates: []
-}
-
-loading = () => {
-  return(
-      <svg width="48" height="48" viewBox="0 0 300 300">
-        <path d="M 150,0 a 150,150 0 0,1 106.066,256.066 l -35.355,-35.355 a -100,-100 0 0,0 -70.711,-170.711 z" fill="#ccc">
-          <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 150 150" to="360 150 150" begin="0s" dur=".5s" fill="freeze" repeatCount="indefinite"></animateTransform>
-        </path>
-      </svg>
-  )
 }
 
 componentDidMount = () => {
@@ -32,10 +23,10 @@ componentDidMount = () => {
 
   render() {
     const ps = this.state.palates
-    const palates = ps.length ? ps.map((p,i) => <div className={'main-palate-item-wrapper'}><Link key={i} to={`/palates/${p.id}`}><Palate key={i} svg={p.data.copy.join('')}/></Link><p>Created by {p.creator}</p></div>) : null
+    const palates = ps.length ? ps.map((p,i) => <div key={'d' + i} className={'main-palate-item-wrapper'}><Link key={'k' + i} to={`/palates/${p.id}`}><Palate key={i} svg={p.data.copy.join('')}/></Link><p>Created by {p.creator}</p></div>) : null
     return (
       <div className={'main-palates-wrapper'}>
-      { this.state.loading ? this.loading() : palates }
+      { this.state.loading ? loading() : palates }
       </div>
     )
   }

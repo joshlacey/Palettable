@@ -3,7 +3,7 @@ import { addColors, removeColors, addOneColor } from '../../actions/uploader';
 import { connect } from 'react-redux';
 import ColorItem from './ColorItem';
 import { ChromePicker } from 'react-color';
-import { loading } from '../../snap/loader.js'
+import { loading } from '../../helpers/loader.js'
 
 class ColorsContainer extends React.Component {
 

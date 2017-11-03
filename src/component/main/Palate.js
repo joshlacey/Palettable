@@ -1,18 +1,13 @@
 import React from 'react';
 import Parser from 'html-react-parser';
-
-String.prototype.replaceAll = function(search, replacement) {
-    var target = this;
-    return target.replace(new RegExp(search, 'g'), replacement);
-};
+import { replaceAll } from '../../helpers/replaceAll.js';
 
 class Palate extends React.Component {
 
 
   render(){
     const string = this.props.svg
-    //debugger
-    const temp = string.replaceAll('style=""', '')
+    const temp = replaceAll(string, 'style=""', '')
     const svg = Parser(temp)
 
     return(

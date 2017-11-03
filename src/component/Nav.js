@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../index.css'
-import NavItem from './NavItem'
 
 class Nav extends React.Component {
 
   componentDidMount = () => {
     const navItems = document.querySelectorAll('.nav-wrapper')
     if(!!navigator.userAgent.match(/iPad/g)) {
-      null
+      return null
     } else {
       navItems.forEach(c => c.addEventListener('mouseenter', this.hoverin))
       navItems.forEach(c => c.addEventListener('mouseleave', this.hoverout))

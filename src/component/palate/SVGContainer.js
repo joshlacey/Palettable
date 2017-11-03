@@ -1,11 +1,8 @@
 import React from 'react';
-import Snap from 'snapsvg-cjs';
 import Parser from 'html-react-parser'
 import { connect } from 'react-redux'
 import SVGElement from './SVGElement'
-//import * as actions from '../../actions/palate'
 import '../../index.css'
-import ColorItemComp from '../main/ColorItemComp'
 import { savePalate, updatePalate, addToPalate, removeCurrentColor, screenShot, resetPalate, removeOneColor, removePalateEls, removeNextColors } from '../../actions/palate'
 import { removeColors } from '../../actions/uploader'
 
@@ -18,13 +15,8 @@ class SVGContainer extends React.Component {
     currentHoverData: ""
   }
 
-// componentDidMount = () => {
-//   var test = Snap('#mainContainer')
-//   test.attr({ viewBox: "0 0 400 400" })
-// }
 
 componentWillUpdate(nextProps, nextState) {
-  //console.log(this.palate)
   if (nextState.save) {
     this.takeScreenShot()
     this.setState({save:false})
@@ -34,7 +26,6 @@ componentWillUpdate(nextProps, nextState) {
       this.props.removeCurrentColor()
     }
   if (nextProps.nextColors.length) {
-    //console.log("nextColors", nextProps.nextColors)
     nextProps.nextColors.forEach( (color, i) => {
       this.props.addToPalate({id: color.split('#')[1], fill: color, position: "" })
     })
@@ -51,8 +42,11 @@ toArray (obj) {
 }
 
 takeScreenShot = () => {
+  debugger
+  //Check to see weather or not the palette is empty to avoid changing running this function on empty container
   if([...this.palate.childNodes].filter(e => e.nodeName === "svg").length) {
     const palateCopy = this.palate.cloneNode(true)
+    debugger
     const children = this.toArray(palateCopy.childNodes)
     const html = children.join('')
     const content = Parser(html)
@@ -97,7 +91,7 @@ deleteMode = () => {
       save: true
     })
   } else {
-    null
+    return null
   }
 }
 
@@ -153,15 +147,13 @@ saveSVG = () => {
     this.props.removePalateEls()
     this.props.removeColors()
   } else {
-    null
+    return null
   }
 }
 
 
   render () {
-    //console.log("reorder?", this.state.reorderMode, '::', "delete?", this.state.deleteMode)
     const elements = this.props.palateEls.map((e, i) =>  <SVGElement key={`key${e.id}`} hoverData={this.hoverData} reorder={this.reorder} deleteEl={this.deleteEl} reorderMode={this.state.reorderMode} deleteMode={this.state.deleteMode} id={`id${e.id}`} fill={e.fill} size={e.size} position={e.position}/>)
-    //const colors = this.props.colorsContainer.map((e, i) => <ColorItemComp height={'20px'} color={e}/>)
     return (
       <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', justifyContent: 'center', gridGap: '1em'}} id='#palateContainer'>
         <div style={{gridColumn: '1/4', marginLeft: 'auto', marginRight: 'auto'}}>
@@ -186,8 +178,6 @@ function mapStateToProps(state) {
     nextColors: state.uploader.nextColors,
     title: state.palate.title,
     note: state.palate.note
-
-    //reorder: state.palate.reorderMode
   }
 }
 

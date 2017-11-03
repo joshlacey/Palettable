@@ -1,4 +1,10 @@
-
+function headers () {
+  return {
+    'content-type': 'application/json',
+    'accept': 'application/json',
+    'Authorization': localStorage.getItem('jwtToken')
+  }
+}
 
 function setLocalStorage(resp) {
   localStorage.setItem("jwtToken", resp.jwt)
@@ -21,6 +27,7 @@ export function loginUser(loginParams) {
     .then((user) => {
       if(user.message) {
         alert(user.message)
+        return null
       } else {
         user.jwt !== undefined ? setLocalStorage(user) : null
         dispatch(loggedIn(user))
@@ -65,13 +72,7 @@ export function createUser(signupParams) {
   }
 }
 
-function headers () {
-  return {
-    'content-type': 'application/json',
-    'accept': 'application/json',
-    'Authorization': localStorage.getItem('jwtToken')
-  }
-}
+
 
 function loadingPalates () {
   return {
@@ -79,11 +80,6 @@ function loadingPalates () {
   }
 }
 
-// export function deletedItem () {
-//   return {
-//     type: 'DELETED_ITEM'
-//   }
-// }
 
 export function deletePalate(id) {
   return function (dispatch) {
