@@ -46,13 +46,6 @@ export function savePalate(userId, copy, title, note, colors) {
   }
 }
 
-export function updatePalate(currentPalate) {
-  return {
-    type: "UPDATE_PALATE",
-    payload: currentPalate
-  }
-}
-
 export function addToPalate(svg) {
   return {
     type: "ADD_TO_PALATE",

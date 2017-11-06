@@ -1,9 +1,9 @@
 import React from 'react';
 import Snap from 'snapsvg-cjs';
-import addHandleFunc from '../../snap/scale.js'
-import { start, move, stop } from '../../snap/dragCallbacks.js'
-import { connect } from 'react-redux'
-import { savePalate, updatePalate } from '../../actions/palate'
+import addHandleFunc from '../../snap/scale.js';
+import { start, move, stop } from '../../snap/dragCallbacks.js';
+import { connect } from 'react-redux';
+
 
 class SVGElement extends React.Component {
 
@@ -69,15 +69,5 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    savePalate: (userId, svg, copyString) => {
-      dispatch(savePalate(userId, svg, copyString))
-    },
-    updatePalate: (currentPalate) => {
-      dispatch(updatePalate(currentPalate))
-    }
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(SVGElement)
+export default connect(mapStateToProps)(SVGElement)

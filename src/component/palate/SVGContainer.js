@@ -3,7 +3,7 @@ import Parser from 'html-react-parser'
 import { connect } from 'react-redux'
 import SVGElement from './SVGElement'
 import '../../index.css'
-import { savePalate, updatePalate, addToPalate, removeCurrentColor, screenShot, resetPalate, removeOneColor, removePalateEls, removeNextColors } from '../../actions/palate'
+import { savePalate, addToPalate, removeCurrentColor, screenShot, resetPalate, removeOneColor, removePalateEls, removeNextColors } from '../../actions/palate'
 import { removeColors } from '../../actions/uploader'
 
 class SVGContainer extends React.Component {
@@ -170,9 +170,6 @@ function mapDispatchToProps(dispatch) {
   return {
     savePalate: (id, elements, title, note, colorsContainer) => {
       dispatch(savePalate(id, elements, title, note, colorsContainer))
-    },
-    updatePalate: (currentPalate) => {
-      dispatch(updatePalate(currentPalate))
     },
     addToPalate: (svg) => {
       dispatch(addToPalate(svg))
