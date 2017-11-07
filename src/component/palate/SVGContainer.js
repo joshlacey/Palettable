@@ -102,7 +102,8 @@ deleteEl = ( circle, parentId ) => {
 }
 
 hexToRgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    //[a-f\d] match a-f and digits between (0-9), {2} match 2 times, () group, i make case insensitive
+    var result = /([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})/i.exec(hex);
     return result ? {
         r: parseInt(result[1], 16),
         g: parseInt(result[2], 16),
