@@ -1,9 +1,8 @@
 import React from 'react';
 import Parser from 'html-react-parser';
-import { replaceAll } from '../../helpers/replaceAll.js';
 
 const Palate = (props) => {
-    const htmlString = replaceAll(props.svg, 'style=""', '')
+    const htmlString = props.svg.replace(/style=""/g, '')
     const svg = Parser(htmlString)
 
     return(

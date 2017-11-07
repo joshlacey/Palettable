@@ -8,7 +8,6 @@ import { editPalate } from '../../actions/palate';
 import { start, move, stop } from '../../snap/dragCallbacks.js';
 import { Link } from 'react-router-dom';
 import NoteForm from '../notes/NoteForm';
-import { replaceAll } from '../../helpers/replaceAll.js';
 
 class RePalate extends React.Component {
 
@@ -25,7 +24,7 @@ class RePalate extends React.Component {
       .then(resp =>  resp.json())
       .then(resp => {
         const html = resp.data.copy.join('')
-        const cleaned = replaceAll(html, 'style=""', '')
+        const cleaned = html.replace(/style=""/g, '')
         const content = Parser(cleaned)
         this.setState({
           loading: false,
