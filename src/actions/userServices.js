@@ -72,14 +72,11 @@ export function createUser(signupParams) {
   }
 }
 
-
-
 function loadingPalates () {
   return {
     type: 'LOADING'
   }
 }
-
 
 export function deletePalate(id) {
   return function (dispatch) {

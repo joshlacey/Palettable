@@ -43,8 +43,8 @@ submitColors = () => {
   //convert to hex values
   const hexes = uniqueColors.map(c => {
           //color is saved as rgb(255,255,255)
-          const arr = c.replace("(", ",").replace(")", ",").split(",")
-          return this.rgbToHex(arr.slice(1,4))
+          const arr = c.replace(/[rgb()]/g, "").split(",")
+          return this.rgbToHex(arr)
       })
     this.props.addColors(hexes)
 }
