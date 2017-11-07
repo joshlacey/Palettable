@@ -6,26 +6,19 @@ import NoteForm from '../notes/NoteForm'
 import ColorTabs from './ColorTabs'
 import '../../index.css'
 
-class EditContainer extends React.Component {
-
-  render () {
-
+const EditContainer = (props) => {
     return (
       <div className={'svg-edit'}>
-
           <SVGContainer />
-
           <div>
             <ImageUploader />
             <ColorsContainer />
           </div>
-
           <NoteForm />
-
           <ColorTabs />
       </div>
     )
-  }
+
 }
 
 export default EditContainer

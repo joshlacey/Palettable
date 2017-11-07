@@ -2,13 +2,9 @@ import React from 'react';
 import Parser from 'html-react-parser';
 import { replaceAll } from '../../helpers/replaceAll.js';
 
-class Palate extends React.Component {
-
-
-  render(){
-    const string = this.props.svg
-    const temp = replaceAll(string, 'style=""', '')
-    const svg = Parser(temp)
+const Palate = (props) => {
+    const htmlString = replaceAll(props.svg, 'style=""', '')
+    const svg = Parser(htmlString)
 
     return(
       <div className={"main-palate-items"}>
@@ -18,7 +14,6 @@ class Palate extends React.Component {
         </svg>
       </div>
     )
-  }
 }
 
 export default Palate

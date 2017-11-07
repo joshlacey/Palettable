@@ -59,12 +59,6 @@ export function removeCurrentColor() {
   }
 }
 
-export function screenShot() {
-  return {
-    type: "SCREENSHOT"
-  }
-}
-
 export function resetPalate ( array ) {
   return {
     type: "RESET_PALATE",

@@ -56,7 +56,6 @@ class SVGElement extends React.Component {
 
 
   render() {
-    //console.log('addedElement', "delete?", nextProps.reorderMode)
     return (
       <svg style={{cursor: 'pointer'}} id={this.props.id} />
     )

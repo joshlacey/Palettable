@@ -3,7 +3,7 @@ import Parser from 'html-react-parser'
 import { connect } from 'react-redux'
 import SVGElement from './SVGElement'
 import '../../index.css'
-import { savePalate, addToPalate, removeCurrentColor, screenShot, resetPalate, removeOneColor, removePalateEls, removeNextColors } from '../../actions/palate'
+import { savePalate, addToPalate, removeCurrentColor, resetPalate, removeOneColor, removePalateEls, removeNextColors } from '../../actions/palate'
 import { removeColors } from '../../actions/uploader'
 
 class SVGContainer extends React.Component {
@@ -124,8 +124,7 @@ hoverData = (parentId) => {
 
 saveSVG = () => {
   if (this.palate.children.length) {
-    const palateCopy = this.palate.cloneNode(true)
-    const children = [...palateCopy.childNodes].map(e => e.outerHTML)
+    const children = [...this.palate.childNodes].map(e => e.outerHTML)
     const elements = children.filter(e => (e !== "<desc>Created with Snap</desc>") && (e !== "<defs></defs>") )
     const id = localStorage.getItem('userId') ? localStorage.getItem('userId') : null
     id ? this.props.savePalate(id, elements, this.props.title, this.props.note, this.props.colorsContainer) : alert("you must be logged in to save.")
@@ -138,7 +137,9 @@ saveSVG = () => {
 
 
   render () {
-    const elements = this.props.palateEls.map((e, i) =>  <SVGElement key={`key${e.id}`} hoverData={this.hoverData} reorder={this.reorder} deleteEl={this.deleteEl} reorderMode={this.state.reorderMode} deleteMode={this.state.deleteMode} id={`id${e.id}`} fill={e.fill} size={e.size} position={e.position}/>)
+    const elements = this.props.palateEls.map((e, i) =>  <SVGElement key={`key${e.id}`}
+          hoverData={this.hoverData} reorder={this.reorder} deleteEl={this.deleteEl} reorderMode={this.state.reorderMode}
+          deleteMode={this.state.deleteMode} id={`id${e.id}`} fill={e.fill} size={e.size} position={e.position}/> )
     return (
       <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', justifyContent: 'center', gridGap: '1em'}} id='#palateContainer'>
         <div style={{gridColumn: '1/4', marginLeft: 'auto', marginRight: 'auto'}}>
@@ -159,7 +160,7 @@ function mapStateToProps(state) {
   return {
     colorsContainer: state.uploader.colorContainer,
     currentColor: state.uploader.color,
-    palateEls: state.palate.otherPalate,
+    palateEls: state.palate.palateEls,
     nextColors: state.uploader.nextColors,
     title: state.palate.title,
     note: state.palate.note
@@ -176,9 +177,6 @@ function mapDispatchToProps(dispatch) {
     },
     removeCurrentColor: () => {
       dispatch(removeCurrentColor())
-    },
-    screenShot: () => {
-      dispatch(screenShot())
     },
     resetPalate: (array) => {
       dispatch( resetPalate(array))

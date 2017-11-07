@@ -31,8 +31,6 @@ class ColorItem extends React.Component {
     })
   }
 
-
-
   render() {
     return(
       <div onClick={this.handleClick} style={this.props.style}>

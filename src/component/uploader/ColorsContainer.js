@@ -25,23 +25,28 @@ deleteColor = (id) => {
 }
 
 componentToHex(c) {
-    var hex = c.toString(16);
+    var hex = c.toString(16); //converts number into its hex value
     return hex.length == 1 ? "0" + hex : hex;
 }
 
-rgbToHex(r, g, b) {
-    return "#" + this.componentToHex(r) + this.componentToHex(g) + this.componentToHex(b);
+rgbToHex(array) {
+    let hexValues = array.map(number => this.componentToHex(parseInt(number, 10)))
+    return "#" + hexValues.join('');
 }
 
 submitColors = () => {
-  const temp = this.state.colorList.map(c => c.color)
-  this.state.pickerColor !== '' ? temp.push(this.state.pickerColor) : null
-  const unique = [...new Set(temp)]
-  const hexes = unique.map(c => {
+  const colors = this.state.colorList.map(c => c.color)
+  //if there is a color selected in the color picker add that to the colors.
+  this.state.pickerColor !== '' ? colors.push(this.state.pickerColor) : null
+  //filter unique colors
+  const uniqueColors = [...new Set(colors)]
+  //convert to hex values
+  const hexes = uniqueColors.map(c => {
+          //color is saved as rgb(255,255,255)
           const arr = c.replace("(", ",").replace(")", ",").split(",")
-          return this.rgbToHex(parseInt(arr[1], 10),parseInt(arr[2], 10),parseInt(arr[3], 10))
+          return this.rgbToHex(arr.slice(1,4))
       })
-  if (unique.length === 1) {
+  if (uniqueColors.length === 1) {
     this.props.addOneColor(hexes[0])
   } else {
     this.props.addColors(hexes)

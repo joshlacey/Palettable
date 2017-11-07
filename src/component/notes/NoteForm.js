@@ -3,20 +3,15 @@ import { connect } from 'react-redux';
 import { handleNoteChange, handleTitleChange } from '../../actions/palate';
 import '../../index.css'
 
-
-class NoteForm extends React.Component{
-
-  render() {
-
+const NoteForm = (props) => {
     return(
       <div>
         <form className={'note-form'} id="titleof" >
-            <input type="text" placeholder="Title" onChange={this.props.handleTitleChange} value={this.props.title}/><br/>
-            <textarea  placeholder="Add description..." onChange={this.props.handleNoteChange} name="note" value={this.props.note} rows="10" cols="30"/>
+            <input type="text" placeholder="Title" onChange={props.handleTitleChange} value={props.title}/><br/>
+            <textarea placeholder="Add description..." onChange={props.handleNoteChange} name="note" value={props.note} rows="10" cols="30"/>
         </form>
       </div>
     )
-  }
 }
 
 function mapStateToProps(state) {
