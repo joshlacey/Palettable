@@ -3,7 +3,7 @@ import Parser from 'html-react-parser'
 import { connect } from 'react-redux'
 import SVGElement from './SVGElement'
 import '../../index.css'
-import { savePalate, addToPalate, removeCurrentColor, resetPalate, removeOneColor, removePalateEls, removeNextColors } from '../../actions/palate'
+import { savePalate, addToPalate, resetPalate, removeOneColor, removePalateEls, removeNextColors } from '../../actions/palate'
 import { removeColors } from '../../actions/uploader'
 
 class SVGContainer extends React.Component {
@@ -21,10 +21,6 @@ componentWillUpdate(nextProps, nextState) {
     this.takeScreenShot()
     this.setState({save:false})
   }
-  if (nextProps.currentColor) {
-    this.props.addToPalate({id: nextProps.currentColor.split('#')[1], size: "", fill: nextProps.currentColor, position: "" })
-    this.props.removeCurrentColor()
-    }
   if (nextProps.nextColors.length) {
     nextProps.nextColors.forEach( (color, i) => {
     this.props.addToPalate({id: color.split('#')[1], fill: color, position: "" })
@@ -67,7 +63,7 @@ reorderMode = () => {
       save: true
     })
   } else {
-    null
+    return null
   }
 }
 
@@ -159,7 +155,6 @@ saveSVG = () => {
 function mapStateToProps(state) {
   return {
     colorsContainer: state.uploader.colorContainer,
-    currentColor: state.uploader.color,
     palateEls: state.palate.palateEls,
     nextColors: state.uploader.nextColors,
     title: state.palate.title,
@@ -174,9 +169,6 @@ function mapDispatchToProps(dispatch) {
     },
     addToPalate: (svg) => {
       dispatch(addToPalate(svg))
-    },
-    removeCurrentColor: () => {
-      dispatch(removeCurrentColor())
     },
     resetPalate: (array) => {
       dispatch( resetPalate(array))

@@ -30,9 +30,7 @@ export function savePalate(userId, copy, title, note, colors) {
       method: 'POST',
       headers: headers(),
       body: JSON.stringify(body)
-
     }
-
     fetch(process.env.REACT_APP_API_ENDPOINT + 'users/' + userId + '/palates', params)
       .then((res) => res.json())
       .then((json) => {
@@ -50,12 +48,6 @@ export function addToPalate(svg) {
   return {
     type: "ADD_TO_PALATE",
     payload: svg
-  }
-}
-
-export function removeCurrentColor() {
-  return{
-    type: "REMOVE_CURRENT_COLOR"
   }
 }
 
@@ -87,7 +79,7 @@ export function handleTitleChange(event) {
 }
 
 
-export function handleNoteChange (event) {
+export function handleNoteChange(event) {
   return {
     type: "NOTE",
     payload: event.target.value

@@ -1,5 +1,5 @@
 import React from 'react';
-import { addColors, removeColors, addOneColor } from '../../actions/uploader';
+import { addColors, removeColors } from '../../actions/uploader';
 import { connect } from 'react-redux';
 import ColorItem from './ColorItem';
 import { ChromePicker } from 'react-color';
@@ -46,11 +46,7 @@ submitColors = () => {
           const arr = c.replace("(", ",").replace(")", ",").split(",")
           return this.rgbToHex(arr.slice(1,4))
       })
-  if (uniqueColors.length === 1) {
-    this.props.addOneColor(hexes[0])
-  } else {
     this.props.addColors(hexes)
-  }
 }
 
 handleSlider = (color) => {
@@ -106,9 +102,6 @@ function mapDispatchToProps(dispatch) {
     },
     removeColors: () => {
       dispatch(removeColors())
-    },
-    addOneColor: (color) => {
-      dispatch(addOneColor(color))
     }
   }
 }
