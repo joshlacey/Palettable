@@ -60,7 +60,7 @@ componentWillUnmount() {
 }
 
 componentDidMount () {
-  document.querySelector('.chrome-picker').style = "background: rgb(255, 255, 255); border: 1px solid #ccc; border-radius: 2px; box-sizing: initial; width: 100%; font-family: Menlo;"
+  document.querySelector('.chrome-picker').style.cssText = "background: rgb(255, 255, 255); border: 1px solid #ccc; border-radius: 2px; box-sizing: initial; width: 100%; font-family: Menlo;"
 }
 
 loadingColors () {
