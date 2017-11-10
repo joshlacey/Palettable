@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Droid+Sans|Roboto:300:500');
 
-/*font-family: 'Droid Sans', sans-serif;
-font-family: 'Roboto', sans-serif;*/
-
 body {
   margin: 0;
   padding: 20px;
@@ -80,25 +77,6 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
   margin-top: 15px;
 }
 
-/*.nav-item:hover {
-  color: white;
-}
-
-.nav-item-red:hover {
-  background-color: rgba(255,0,0,.5);
-  border: 1px solid rgba(255,0,0,1);
-}
-
-.nav-item-green:hover {
-  background-color: rgba(0,255,0,.5);
-  border: 1px solid rgba(0,255,0,1);
-}
-
-.nav-item-blue:hover {
-  background-color: rgba(0,0,255,.5);
-  border: 1px solid rgba(0,0,255,1);
-}*/
-
 /***Button***/
 
 .nice-button {
@@ -110,12 +88,6 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
   font-size: 1em;
   transition: .5s ease-in-out;
 }
-
-/*.nice-button:hover {
-  color: #fff;
-  background-color: rgba(0, 255, 0, .5);
-  border: 1px solid rgba(0, 255, 0, 1);
-}*/
 
 .nice-button:focus {
   outline:none;
@@ -131,12 +103,6 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
   margin: 5px;
   transition: .5s ease-in-out;
 }
-
-/*.mean-button:hover {
-  color: #fff;
-  background-color: rgba(255, 0, 0, .75);
-  border: 1px solid rgba(255, 0, 0, 1);
-}*/
 
 .mean-button:focus {
   outline:none;
@@ -170,11 +136,6 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
   border: 1px solid #ccc;
 }
 
-/*.main-palate-items>div:hover {
-  background-color: rgba(255,255,255, 0);
-  z-index: 0;
-}*/
-
 .main-palate-items>svg {
   grid-column: 1/2;
   grid-row: 1/2;
@@ -200,11 +161,6 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
   border: 1px solid white;
   margin-top: 20px;
 }
-
-/*.color-item-wrapper:hover {
-  border: 1px solid #ccc;
-  color: black;
-}*/
 
 .color-item-wrapper>div {
   float: left;
@@ -281,31 +237,21 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
   transition: .5s ease-in-out;
 }
 
-/*.login-form:hover {
-  border: 1px solid black;
-}*/
-
 .login-form>h1 {
   transition: .5s ease-in-out;
 }
-
-/*.login-form>h1:hover {
-  color: black;
-}*/
-
 
 .login-form>input {
   margin-bottom: 20px;
   padding: 5px;
 }
 
-@media (hover: hover) {
 
   .nav-item:hover {
     color: white;
   }
 
-  .nav-item-red:hover {
+ .nav-item-red:hover {
     background-color: rgba(255,0,0,.5);
     border: 1px solid rgba(255,0,0,1);
   }
@@ -350,8 +296,6 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
     color: black;
   }
 
-}
-
 
 /***FOR IPAD***/
 
@@ -371,49 +315,3 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
     width: 100%;
   }
 }
-
-/***Reset***/
-
-/*html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-/*article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}*/
