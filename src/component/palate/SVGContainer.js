@@ -144,6 +144,7 @@ saveSVG = () => {
             {elements}
           </svg>
         </div>
+          {this.props.palateEls.length ? <p style={{gridColumn: '1/4', textAlign: 'center'}}>Click and drag to move. Double click to manipulate.</p> : null}
           <button className={"nice-button palate-button"} style={ this.state.reorderMode ? {backgroundColor: 'rgba(0, 255, 0, .5)'} : null} onClick={this.reorderMode}>Reorder Mode</button>
           <button className={"nice-button palate-button"} style={ this.state.deleteMode ? {backgroundColor: 'rgba(0, 255, 0, .5)'} : null} onClick={this.deleteMode}>Delete Mode</button>
           <button className={"nice-button palate-button"} onClick={this.saveSVG}>Save</button>

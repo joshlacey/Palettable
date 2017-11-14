@@ -9,6 +9,7 @@ import SVGEdit from './palate/SVGEdit';
 import Logout from './Logout'
 import MyPalates from './main/MyPalates'
 import { connect } from 'react-redux';
+import Home from './Home';
 
 
 class Body extends React.Component {
@@ -19,7 +20,7 @@ class Body extends React.Component {
     const username = localStorage.getItem('username')
     return (
       <Switch>
-        <Route exact path='/' render={()=><h1>HOME</h1>} />
+        <Route exact path='/' component={Home} />
         <Route path='/palates' component={PalatesContainer} />
         <Route path='/logout' component={Logout} />
         <Route path="/login" render={(props) => <AuthLoginForm {...props}/> }/>
