@@ -42,7 +42,6 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
   grid-template-columns: 1fr;
   text-align: left;
   font-size: 3em;
-  /*border: 1px solid #ccc;*/
   transition: .75s ease-in-out;
 }
 
