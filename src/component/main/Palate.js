@@ -8,7 +8,7 @@ const Palate = (props) => {
     return(
       <div className={"main-palate-items"}>
         <div></div>
-        <svg height='auto' id={'rePalate'} >
+        <svg height='100%' id={'rePalate'} >
           {svg}
         </svg>
       </div>

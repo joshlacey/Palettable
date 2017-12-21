@@ -80,7 +80,7 @@ deleteMode = () => {
 }
 
 reorder = (circle, parentId) => {
-  const index = this.props.palateEls.findIndex( e => `id${e.id}` == parentId )
+  const index = this.props.palateEls.findIndex( e => `id${e.id}` === parentId.toString() )
 
     function rearrange(array, index) {
       let toAdd = array.splice(index,1)
@@ -93,9 +93,9 @@ reorder = (circle, parentId) => {
 }
 
 deleteEl = ( circle, parentId ) => {
-  let index = this.props.palateEls.findIndex(e => `id${e.id}` == parentId)
+  let index = this.props.palateEls.findIndex(e => `id${e.id}` === parentId.toString())
   let copy = [...this.props.palateEls]
-  let newArr = copy.filter(el => `id${el.id}` != parentId )
+  let newArr = copy.filter(el => `id${el.id}` !== parentId.toString() )
   let color = copy[index].fill
   this.props.removeOneColor(color)
   this.props.resetPalate(newArr)
@@ -112,7 +112,7 @@ hexToRgb(hex) {
 }
 
 hoverData = (parentId) => {
-  const circle = this.props.palateEls.find(element => `id${element.id}` == parentId)
+  const circle = this.props.palateEls.find(element => `id${element.id}` === parentId.toString())
   const rgb = this.hexToRgb(circle.fill)
   this.setState({
     currentHoverData: `Hex Value: ${circle.fill}, RGB Value: ${rgb.r}, ${rgb.g}, ${rgb.b}`

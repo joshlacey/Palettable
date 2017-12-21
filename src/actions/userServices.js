@@ -29,11 +29,16 @@ export function loginUser(loginParams) {
         alert(user.message)
         return null
       } else {
-        user.jwt !== undefined ? setLocalStorage(user) : null
+        checkForJWT(user)
         dispatch(loggedIn(user))
       }
     })
   }
+}
+
+function checkForJWT(user) {
+  console.log('checked user')
+  return user.jwt !== undefined ? setLocalStorage(user) : null
 }
 
 function loggedIn(user) {

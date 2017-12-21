@@ -26,7 +26,7 @@ deleteColor = (id) => {
 
 componentToHex(c) {
     var hex = c.toString(16); //converts number into its hex value
-    return hex.length == 1 ? "0" + hex : hex;
+    return hex.length === 1 ? '0' + hex : hex;
 }
 
 rgbToHex(array) {
@@ -37,7 +37,7 @@ rgbToHex(array) {
 submitColors = () => {
   const colors = this.state.colorList.map(c => c.color)
   //if there is a color selected in the color picker add that to the colors.
-  this.state.pickerColor !== '' ? colors.push(this.state.pickerColor) : null
+  if(this.state.pickerColor !== '') {colors.push(this.state.pickerColor)}
   //filter unique colors
   const uniqueColors = [...new Set(colors)]
   //convert to hex values

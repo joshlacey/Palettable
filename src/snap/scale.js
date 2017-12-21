@@ -1,11 +1,10 @@
 export default function addHandleFunc(el, s, handleGroup, dragging) {
 
-        if( dragging == false ) {
+        if( dragging === false ) {
                 dragging = true;
                 var bb = el.getBBox();
                 var handle = s.circle(bb.x+bb.width, bb.y+bb.height/2, 10).attr({class: 'handler'});
                 handleGroup = s.group(el, handle);
-                //console.log("handleGroup", handleGroup)
                 handleGroup.drag(moveAHF,startAHF,stopAHF);
         } else {
                 dragging = false;

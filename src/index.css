@@ -117,6 +117,10 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
     text-align: center;
 }
 
+.how-it-works-wrapper {
+  grid-column: 1/4;
+  padding-bottom: 20px;
+}
 
 .main-palate-items {
   display: grid;
