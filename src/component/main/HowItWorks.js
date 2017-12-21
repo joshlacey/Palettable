@@ -6,7 +6,7 @@ class HowItWorks extends React.Component {
   }
 
   showButton = () => {
-    return (<button className={'nice-button'} onClick={this.handleClick}>How it works</button>)
+    return (<button className={'nice-button'} onClick={this.handleClick}>View Demo Video</button>)
   }
 
   showVideo = () => {

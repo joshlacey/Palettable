@@ -12,7 +12,7 @@ const Home = () => {
         <br/>
         Enjoy!<br/>
         <br/>
-        <a href="http://joshualacey.com/">-Joshua Lacey</a>
+        <a href="http://joshualacey.com/" target="_blank" rel="noopener noreferrer">-Joshua Lacey</a>
      </p>
     </div>
   )

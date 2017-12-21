@@ -2,15 +2,28 @@
 
 body {
   margin: 0;
-  padding: 20px;
+  /*padding: 20px;*/
   font-family: 'Roboto', sans-serif;
   color: #ccc;
-
 }
 
-a:link {
+a {
+  text-decoration: none;
+  color: #4a92a8;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #B89494;
+}
+
+a:visited {
   text-decoration: none;
   color: #ccc;
+}
+
+a:visited:hover {
+  color: #B89494
 }
 
 textarea:focus, input:focus {
@@ -31,6 +44,7 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   font-family: 'Droid Sans', sans-serif;
+  padding: 20px;
   grid-gap: 1em;
   font-weight: bold;
   font-size: 1em;
@@ -113,13 +127,13 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 1em;
-    padding: 20px;
+    padding: 0px 40px 40px;
     text-align: center;
 }
 
 .how-it-works-wrapper {
   grid-column: 1/4;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
 }
 
 .main-palate-items {
@@ -153,7 +167,7 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
   display: grid;
   justify-content: center;
   text-align: center;
-  padding: 20px;
+  padding: 40px;
 }
 
 .repalate-container>svg {
@@ -178,7 +192,7 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
 
 /***SvgEdit***/
 .svg-edit {
-  padding: 2em;
+  padding: 4em;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 4em;
@@ -299,6 +313,26 @@ textarea, input, button{font-family:inherit; border: 1px solid #ccc;}
     color: black;
   }
 
+.footer{
+  width: 100%;
+  position: fixed;
+  bottom: 0px;
+  z-index: 5;
+  padding: 10px;
+  background-color: white;
+  border-top: 1px solid #ccc;
+}
+
+.footer>div:first-of-type {
+  display: inline-block;
+  float: left;
+}
+
+.footer>div:last-of-type {
+  display: inline-block;
+  margin-right: 20px;
+  float: right;
+}
 
 /***FOR IPAD***/
 

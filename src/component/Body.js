@@ -11,25 +11,22 @@ import MyPalates from './main/MyPalates'
 import { connect } from 'react-redux';
 import Home from './Home';
 
+const Body = (props) => {
+  const AuthSignupForm = (Authorize(SignupForm))
+  const AuthLoginForm = (Authorize(LoginForm))
+  const username = localStorage.getItem('username')
 
-class Body extends React.Component {
-
-  render () {
-    const AuthSignupForm = (Authorize(SignupForm))
-    const AuthLoginForm = (Authorize(LoginForm))
-    const username = localStorage.getItem('username')
-    return (
-      <Switch>
-        <Route exact path='/' component={Home} />
-        <Route path='/palates' component={PalatesContainer} />
-        <Route path='/logout' component={Logout} />
-        <Route path="/login" render={(props) => <AuthLoginForm {...props}/> }/>
-        <Route path="/signup" render={(props) => <AuthSignupForm {...props}/> }/>
-        <Route path='/edit' component={SVGEdit} />
-        <Route path={`/${username}/palates`} component={MyPalates} />
-      </Switch>
-    )
-  }
+  return (
+    <Switch>
+      <Route exact path='/' component={Home} />
+      <Route path='/palates' component={PalatesContainer} />
+      <Route path='/logout' component={Logout} />
+      <Route path="/login" render={(props) => <AuthLoginForm {...props}/> }/>
+      <Route path="/signup" render={(props) => <AuthSignupForm {...props}/> }/>
+      <Route path='/edit' component={SVGEdit} />
+      <Route path={`/${username}/palates`} component={MyPalates} />
+    </Switch>
+  )
 }
 
 function mapStateToProps(state) {
