@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/userServices';
 import { withRouter } from 'react-router'
-import { Redirect } from 'react-router-dom';
 
 class LoginForm extends React.Component{
 

@@ -65,7 +65,7 @@ componentDidUpdate = (prevState, prevProps) => {
 
   render(){
     const user = localStorage.getItem('username')
-    const palateColors = this.state.colors.length ? this.state.colors.map((color,i) =>  <ColorItemComp key={i} color={color}/> ) : null
+    const palateColors = this.state.colors.length ? this.state.colors.map((color,i) =>  <ColorItemComp key={i+color} color={color}/> ) : null
     return(
       <div className={'repalate-container'}>
         <svg width={'400px'} height={'400px'} id={'rePalate'} >
@@ -74,7 +74,7 @@ componentDidUpdate = (prevState, prevProps) => {
         <p>{this.state.creator !== localStorage.getItem('username') ? `created by: ${this.state.creator}` : 'created by you'}</p>
         <h1>{this.state.title}</h1>
         <p>{this.state.note}</p>
-        {palateColors}
+          {palateColors}
         <br/><br/>
         { (!this.state.title && (this.state.creator === user)) ? <div><NoteForm /><button className={'nice-button'} onClick={this.updateInfo}>Update</button></div> : null}
         <br/><br/>

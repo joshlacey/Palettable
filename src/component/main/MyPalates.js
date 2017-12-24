@@ -17,9 +17,11 @@ componentDidMount = () => {
   render() {
     const ps = this.props.palates
     const palates = ps.length ? ps.map((p,i) => <Link key={i} to={`/palates/${p.id}`}><Palate key={i} svg={p.data.copy.join('')}/><p style={{color: '#ccc'}}>{p.data.title}</p></Link>) : null
+    const newUser = !this.props.palates.length
     return (
       <div className={'main-palates-wrapper'}>
       { this.props.loading ? loading() : palates }
+      { (!this.props.loading && newUser) ? <p style={{gridColumn: '2/3'}}>You have no palettes</p> : ''}
       </div>
     )
   }

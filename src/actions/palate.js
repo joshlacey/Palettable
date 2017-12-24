@@ -37,6 +37,7 @@ export function savePalate(userId, copy, title, note, colors) {
         if (json){
           dispatch(savedPalate(json))
           alert('Palette Saved')
+          return json
         } else {
           alert("didn't work")
         }
