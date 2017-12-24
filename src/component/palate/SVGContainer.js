@@ -29,6 +29,11 @@ componentWillUpdate(nextProps, nextState) {
   }
 }
 
+componentWillUnmount () {
+  this.props.removePalateEls()
+  this.props.removeColors()
+}
+
 organizeDOMObject (obj) {
   const children = obj.props.children
   //if children returns an array take the last one that was rendered which should be the actual circle
@@ -131,7 +136,6 @@ saveSVG = () => {
     return null
   }
 }
-
 
   render () {
     const elements = this.props.palateEls.map((e, i) =>  <SVGElement key={`key${e.id}`}

@@ -39,7 +39,7 @@ class ImageUploader extends React.Component {
     return (
       <div className={'image-form'}>
         <form onSubmit={this.handleSubmit}>
-          <input maxlength='500' onChange={this.handleChange} placeholder={'Image Url'}/>
+          <input maxLength='500' onChange={this.handleChange} placeholder={'Image Url'}/>
           <button className={'nice-button'} type='submit'>Sample ></button>
         </form>
         <div><p style={{color: 'red', fontSize: '.5em'}}>{errorMessage}</p></div>
