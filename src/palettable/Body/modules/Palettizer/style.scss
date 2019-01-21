@@ -1,0 +1,36 @@
+.palettizer {
+  display: grid;
+  grid-template-columns: 1fr;
+  &>div {
+    width: 400px;
+    margin: 0 auto;
+    height: 400px;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    background-color: rgba(255,255,255,.5);
+    z-index: 2;
+    transition: .5s ease-in-out;
+    border: 1px solid #ccc;
+    &:hover {
+      background-color: rgba(255,255,255, 0);
+      z-index: 0;
+    }
+  }
+  &>svg {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    display: block;
+    margin: 0 auto;
+    width: 400px;
+    background-color: white;
+  }
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+  .palettizer>div {
+    width: 100%;
+  }
+  .palettizer>svg {
+    width: 100%;
+  }
+}

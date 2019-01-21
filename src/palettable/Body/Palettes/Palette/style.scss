@@ -1,0 +1,10 @@
+.palette__wrapper {
+  display: grid;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+  &>svg {
+    border: 1px solid #ccc;
+    background-color: white;
+  }
+}

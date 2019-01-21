@@ -1,23 +1,15 @@
-import React, { Component } from 'react';
+import React, { Fragment } from 'react';
 import './App.css';
-import Nav from './component/Nav';
-import Footer from './component/Footer'
+import Nav from './palettable/Nav';
+import Footer from './palettable/Footer';
+import Body from './palettable/Body';
 
-
-import Body from './component/Body'
-
-
-class App extends Component {
-
-  render() {
-    return (
-      <div>
-        <Nav />
-        <Body />
-        <Footer />
-      </div>
-    );
-  }
-}
-
-export default App
+export default function App(){
+	return (
+		<Fragment>
+			<Nav />
+			<Body />
+			<Footer />
+		</Fragment>
+	);
+} 

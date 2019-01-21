@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css?family=Droid+Sans|Roboto:300:500');
+
+$chromatic-grey: #8383A1;
+$background-grey: #efefef;
+
+body {
+  margin: 0;
+  /*padding: 20px;*/
+  font-family: 'Roboto', sans-serif;
+  color: $chromatic-grey;
+  background-color: $background-grey;
+}
+
+textarea:focus, input:focus {
+  outline: none;
+  border: 1px solid black;
+}
+
+textarea {
+  resize: none;
+}
+
+textarea, input, button {
+  font-family:inherit;
+  border: 1px solid $chromatic-grey;
+}
+
+/***Buttons***/
+
+@mixin button {
+  background-color: $background-grey;
+  color: $chromatic-grey;
+  border: 1px solid $chromatic-grey;
+  padding: 10px ;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  margin: 5px;
+  transition: .5s ease-in-out;
+  &:focus {
+    outline:none;
+  }
+}
+
+.nice-button {
+  @include button;
+  &:hover {
+    color: #fff;
+    background-color: rgba(0, 255, 0, .5);
+    border: 1px solid rgba(0, 255, 0, 1);
+  }
+}
+
+.mean-button {
+  @include button;
+  &:hover {
+    color: #fff;
+    background-color: rgba(255, 0, 0, .75);
+    border: 1px solid rgba(255, 0, 0, 1);
+  }
+}

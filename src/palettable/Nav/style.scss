@@ -1,0 +1,72 @@
+$chromatic-grey: #8383A1;
+/***Navigation***/
+
+.navbar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  font-family: 'Droid Sans', sans-serif;
+  padding: 20px;
+  grid-gap: 1em;
+  font-weight: bold;
+  font-size: 1em;
+  white-space: nowrap;
+  &>a {
+    text-decoration: none;
+  }
+}
+
+.nav-wrapper {
+  display:grid;
+  grid-template-columns: 1fr;
+  text-align: left;
+  font-size: 3em;
+  transition: .75s ease-in-out;
+}
+
+.overlap {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.text {
+  margin-top: 0;
+  color: rgba(255, 0, 0, .33);
+}
+
+.text2 {
+  margin-top: 0;
+  color: rgba(0, 255, 0, .33);
+  transition: .75s ease-in-out;
+}
+
+.text3 {
+  margin-top: 0;
+  color: rgba(0, 0, 255, .33);
+  transition: .75s ease-in-out;
+}
+
+.nav-item {
+  border: 1px solid $chromatic-grey;
+  text-align: center;
+  padding: 10px;
+  transition: .5s ease-in-out;
+  color: $chromatic-grey;
+  margin-top: 15px;
+  &:hover {
+    color: white;
+  }
+  &__red:hover {
+     background-color: rgba(255,0,0,.5);
+     border: 1px solid rgba(255,0,0,1);
+   }
+
+   &__green:hover {
+     background-color: rgba(0,255,0,.5);
+     border: 1px solid rgba(0,255,0,1);
+   }
+
+   &__blue:hover {
+     background-color: rgba(0,0,255,.5);
+     border: 1px solid rgba(0,0,255,1);
+   }
+}

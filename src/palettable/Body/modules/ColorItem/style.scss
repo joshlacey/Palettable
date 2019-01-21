@@ -1,0 +1,19 @@
+
+.color-item__wrapper {
+  border: 1px solid white;
+  margin-top: 20px;
+  &>div {
+    float: left;
+    width: 20%;
+    height: 85px;
+    margin-right: 10px;
+  }
+  &>p {
+    text-align: left;
+  }
+  &:hover {
+    border: 1px solid #ccc;
+    color: black;
+    background-color: white;
+  }
+}

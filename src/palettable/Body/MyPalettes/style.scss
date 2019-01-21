@@ -1,0 +1,24 @@
+$chromatic-grey: #8383A1;
+.my-palettes {
+  &__wrapper {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 1em;
+    padding: 0px 40px 40px;
+    text-align: center;
+    &>a {
+      text-decoration: none;
+      color: $chromatic-grey;
+    }
+  }
+  @media screen and (min-width: 880px) {
+    &__wrapper {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media screen and (min-width: 1300px) {
+    &__wrapper {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}

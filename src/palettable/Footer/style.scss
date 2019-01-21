@@ -1,0 +1,15 @@
+$chromatic-grey: #8383A1;
+$background-grey: #efefef;
+.footer{
+  width: 100%;
+  position: fixed;
+  bottom: 0px;
+  z-index: 5;
+  padding: 10px;
+  background-color: $background-grey;
+  text-align: center;
+  box-shadow: 0px -5px 10px #ddd;
+  &>a {
+    margin-left: 20px;
+  }
+}

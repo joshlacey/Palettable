@@ -1,0 +1,14 @@
+.note-form {
+  margin: 0 auto 0;
+  &>input {
+    width: 100%;
+    font-size: 1em;
+    margin-top: 15px;
+    padding: 5px;
+  }
+  &>textarea {
+    width: 100%;
+    margin: 15px auto 0;
+    padding: 5px;
+  }
+}

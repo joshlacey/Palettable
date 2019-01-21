@@ -1,0 +1,21 @@
+.login-signup-form {
+  margin: 10% auto;
+  border: 1px solid #ccc;
+  text-align: center;
+  width: 200px;
+  padding: 10px 30px 50px;
+  transition: .5s ease-in-out;
+  &>h1{
+    transition: .5s ease-in-out;
+  }
+  &>input {
+    margin-bottom: 20px;
+    padding: 5px;
+  }
+  &:hover {
+    border: 1px solid black;
+  }
+  &>h1:hover {
+    color: black;
+  }
+}
