@@ -1,18 +1,20 @@
 # Palettable
-###### A React App using Snap.svg javascript library to render a mutible color palette.
+## A React with Redux color palette making app.
 
-Live Demo: https://palettable.herokuapp.com/
+[Live Demo](https://palettable.netlify.com/palates)
 
 ![So Satisfying](https://media.giphy.com/media/PH8gHFw2YJPaM/giphy.gif)
 
 **Main Features**
-
 - Palate Selector using ChromePicker from the 'react-color' package.
-- Image color selector powered by Google Cloud Vision API. 
 - Drag functions from Snap.svg 'snapsvg-cjs'
 - [Rails Backend](https://github.com/joshlacey/final-project-backend) for persisting user's saved palettes
 
-**Dependencies**
+## File Structure explaination
 
-set environment variable REACT_APP_CLOUDVISION_KEY to equal your personal [GoogleCloudVision](https://cloud.google.com/vision/) API KEY to enable image uploader to make the necessary api call.
-
+Component folders are organized by their page route. 
+- `index.js` is the file that provides the default export from the file.
+- `*.container.js` is the extension given to the Redux connect wrapper.
+- `*.component.js` is the extension given to the React component.
+- `styles.scss` each component imports its own sass this keeps ui management localized to the component level.
+- `modules` each component can also have its own modules. Any shared modules will be located in the at the same directory level as the highest level component which also requires the module.
