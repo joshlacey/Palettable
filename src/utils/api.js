@@ -1,6 +1,5 @@
 /*global process, localStorage, fetch */
-const endpoint = process.env.REACT_APP_API_ENDPOINT;
-const visionAPIKey = process.env.REACT_APP_CLOUDVISION_KEY;
+const endpoint = 'https://palettable-backend.herokuapp.com/api/v1/';
 
 function headers(auth = false) {
 	const header = {
@@ -76,36 +75,36 @@ export function getMyPalates() {
 	);
 }
 
-export function searchColors({ url }) {
-	const body = {
-		requests: [
-			{
-				image: {
-					source: {
-						imageUri: `${url}`
-					}
-				},
-				features: [
-					{
-						type: 'IMAGE_PROPERTIES',
-						maxResults: 1
-					}
-				]
-			}
-		]
-	};
-	const params = {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		cache: 'no-cache',
-		body: JSON.stringify(body)
-	};
-
-	return fetch(
-		'https://vision.googleapis.com/v1/images:annotate?key=' + visionAPIKey,
-		params
-	).then(res => res.json());
-}
+// export function searchColors({ url }) {
+// 	const body = {
+// 		requests: [
+// 			{
+// 				image: {
+// 					source: {
+// 						imageUri: `${url}`
+// 					}
+// 				},
+// 				features: [
+// 					{
+// 						type: 'IMAGE_PROPERTIES',
+// 						maxResults: 1
+// 					}
+// 				]
+// 			}
+// 		]
+// 	};
+// 	const params = {
+// 		method: 'POST',
+// 		headers: { 'Content-Type': 'application/json' },
+// 		cache: 'no-cache',
+// 		body: JSON.stringify(body)
+// 	};
+//
+// 	return fetch(
+// 		'https://vision.googleapis.com/v1/images:annotate?key=' + visionAPIKey,
+// 		params
+// 	).then(res => res.json());
+// }
 
 export function savePalate({ userId, copy, title, note, colors }) {
 	const body = {
