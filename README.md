@@ -6,7 +6,6 @@
 ![So Satisfying](https://media.giphy.com/media/PH8gHFw2YJPaM/giphy.gif)
 
 **Main Features**
-- Palate Selector using ChromePicker from the 'react-color' package.
 - Drag functions from Snap.svg 'snapsvg-cjs'
 - [Rails Backend](https://github.com/joshlacey/final-project-backend) for persisting user's saved palettes
 
