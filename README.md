@@ -11,6 +11,10 @@
 
 ## File Structure explaination
 
+[My Blog Post](https://medium.com/@williamjoshualacey/i-konmarid-an-old-react-app-15186fa76b41)
+
+__tldr;__
+
 Component folders are organized by their page route. 
 - `index.js` is the file that provides the default export from the file.
 - `*.container.js` is the extension given to the Redux connect wrapper.
