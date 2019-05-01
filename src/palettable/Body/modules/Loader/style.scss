@@ -1,0 +1,10 @@
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader__rotate {
+  animation: rotate .5s linear infinite;
+  height: 50vh;
+}

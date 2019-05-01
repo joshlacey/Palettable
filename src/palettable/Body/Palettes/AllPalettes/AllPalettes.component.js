@@ -26,7 +26,9 @@ export default class AllPalettes extends Component {
     const { palates, loading } = this.state;
     if (loading) {
       return (
-        <div style={{ gridRow: '1/2', gridColumn: '2/3' }}>
+        <div style={{ gridRow: '1/2', gridColumn: '2/3', textAlign: 'center' }}>
+          <p>Please hold on a sec while my free server space wakes up.</p>
+          <p>I promise everything is pretty zippy once the server gets going!</p>
           <Loader />
         </div>
       );

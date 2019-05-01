@@ -7,6 +7,7 @@ export default function Palettes(){
 	return (
 		<Fragment>
 			<Switch>
+				<Route exact path="/" component={AllPalettes} />
 				<Route exact path="/palates" component={AllPalettes} />
 				<Route path="/palates/:id" component={Palette} />
 			</Switch>
